@@ -1,0 +1,60 @@
+.authorization{
+    &__input{
+        ::placeholder{
+            color: #9F9F9F;
+            font-size: 15px;
+            line-height: 23px;
+        }
+        padding-left: 16px;
+        outline: none;
+        font-size: 15px;
+        line-height: 23px;
+        border: 1px solid #B3CDF8;
+        box-sizing: border-box;
+        border-radius: 8px;
+        width: 100%;
+        height: 56px;
+        color: #333;
+        &:focus {
+            border-color: #5C98F1;
+        }
+    }
+    &__label{
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 19px;
+        color: #333333;
+        margin: 0 0 4px;
+    }
+    &__warning{
+        visibility: hidden;
+        color: #FB6262;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 19px;
+    }
+    &__inputWrapper{
+        width: 354px;
+        position: relative;
+        &-warning{
+            &::after{
+                content: "";
+                background : url(../../../assets/WarningInput.svg);
+                background-size: contain;
+                width: 18px;
+                height: 18px;
+                position: absolute;
+                top: 42px;
+                right: 16px;
+                z-index: 4;
+            }
+            & .authorization__warning{
+                visibility: visible;
+            }
+            & .authorization__input{
+                border-color: #FB6262;
+                // background-image: image-url('../../../assets/WarningInput.svg');
+            }
+        }
+    }
+}

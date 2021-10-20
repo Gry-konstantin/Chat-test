@@ -1,0 +1,22 @@
+.authorization{
+    &__button{
+        background: #5C98F1;
+        border-radius: 8px;
+        width: 233px;
+        height: 56px;
+        border: none;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 23px;
+        color: #FFFFFF;
+        &:hover{
+            background: #4583DE;
+        }
+        &:active{
+            background: #2C6AC7;
+        }
+        &:disabled{
+            background: #D1D1D1;
+        }
+    }
+}

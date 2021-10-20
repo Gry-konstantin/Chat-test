@@ -1,24 +1,30 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React, { useState } from "react";
+import { Input } from "./components/atoms/Input";
+import { Button } from "./components/atoms/Button";
 
 function App() {
+  const [inputValue, setInputValue] = useState<string>("");
+  const [isDisabledButton, setisDisabledButton] = useState<boolean>(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Input
+        classContainer="authorization__inputWrapper"
+        classInput="authorization__input"
+        classLabel="authorization__label"
+        classWarning="authorization__warning"
+        warning="Something goes wrong"
+        label="User name"
+        placeholder="Input user name"
+        value={inputValue}
+        onChange={setInputValue}
+      />
+      <Button
+        textButton="Log In"
+        classButton="authorization__button"
+        isDisabled={isDisabledButton}
+        onClick={setisDisabledButton}
+      />
     </div>
   );
 }
