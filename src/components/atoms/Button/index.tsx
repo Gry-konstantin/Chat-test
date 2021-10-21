@@ -2,18 +2,26 @@ import React from "react";
 import "./styles.scss";
 
 interface IButton {
-  // childrenButton: string;
-  classButton?: string;
+  className?: string;
   isDisabled?: boolean;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  type?: "submit" | "button" | "reset";
 }
 
 export const Button: React.FC<IButton> = ({
+  onClick,
   children,
-  classButton,
+  className,
   isDisabled = false,
+  type = "button",
 }) => {
   return (
-    <button className={classButton} disabled={isDisabled}>
+    <button
+      className={className}
+      disabled={isDisabled}
+      onClick={onClick}
+      type={type}
+    >
       {children}
     </button>
   );

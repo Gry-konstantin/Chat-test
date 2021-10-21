@@ -3,43 +3,42 @@ import "./styles.scss";
 import { regex } from "../../../constants/regex";
 
 interface IInput {
-  classContainer: string;
-  warning?: string;
+  className?: string;
+  errorMesage?: string;
   value: string;
   onChange: (value: string) => void;
   label?: string;
   placeholder?: string;
+  isError?: boolean;
 }
 
 export const Input: React.FC<IInput> = ({
-  classContainer,
-  warning,
+  className = "",
+  errorMesage,
   label,
   value,
   onChange,
   placeholder,
+  children,
 }) => {
   const handleValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.target.value.search(regex) !== -1
-      ? event.target.parentElement?.classList.add(
-          `${classContainer}__inputWrapper-warning`
-        )
-      : event.target.parentElement?.classList.remove(
-          `${classContainer}__inputWrapper-warning`
-        );
     onChange(event.target.value);
   };
 
   return (
-    <div className={`${classContainer}__inputWrapper`}>
-      <p className={`${classContainer}__label`}>{label}</p>
-      <input
-        className={`${classContainer}__input`}
-        value={value}
-        placeholder={placeholder}
-        onChange={handleValueChange}
-      />
-      <p className={`${classContainer}__warning`}>{warning}</p>
+    <div
+      className={`${className} container ${errorMesage && "container--error"}`}
+    >
+      {label && <label className="container__label">{label}</label>}
+      <div tabIndex={0} className="container__input">
+        <input
+          value={value}
+          placeholder={placeholder}
+          onChange={handleValueChange}
+        />
+        <div className="container__image">{children}</div>
+      </div>
+      {errorMesage && <p className="container__text--error">{errorMesage}</p>}
     </div>
   );
 };
