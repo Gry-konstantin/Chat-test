@@ -19,7 +19,7 @@ export const Input: React.FC<IInput> = ({
   onChange,
   placeholder,
 }) => {
-  const handleNameField = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.target.value.search(regex) !== -1
       ? event.target.parentElement?.classList.add(
           `${classContainer}__inputWrapper-warning`
@@ -37,7 +37,7 @@ export const Input: React.FC<IInput> = ({
         className={`${classContainer}__input`}
         value={value}
         placeholder={placeholder}
-        onChange={handleNameField}
+        onChange={handleValueChange}
       />
       <p className={`${classContainer}__warning`}>{warning}</p>
     </div>

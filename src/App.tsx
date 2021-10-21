@@ -4,7 +4,6 @@ import { Button } from "./components/atoms/Button";
 
 function App() {
   const [inputValue, setInputValue] = useState<string>("");
-  const [isDisabledButton, setisDisabledButton] = useState<boolean>(false);
 
   return (
     <div className="App">
@@ -16,12 +15,7 @@ function App() {
         value={inputValue}
         onChange={setInputValue}
       />
-      <Button
-        childrenButton="Log In"
-        classButton="authorization__button"
-        isDisabled={isDisabledButton}
-        onClick={setisDisabledButton}
-      />
+      <Button classButton="authorization__button">Log in</Button>
     </div>
   );
 }
