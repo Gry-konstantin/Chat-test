@@ -9,10 +9,7 @@ function App() {
   return (
     <div className="App">
       <Input
-        classContainer="authorization__inputWrapper"
-        classInput="authorization__input"
-        classLabel="authorization__label"
-        classWarning="authorization__warning"
+        classContainer="authorization"
         warning="Something goes wrong"
         label="User name"
         placeholder="Input user name"
@@ -20,7 +17,7 @@ function App() {
         onChange={setInputValue}
       />
       <Button
-        textButton="Log In"
+        childrenButton="Log In"
         classButton="authorization__button"
         isDisabled={isDisabledButton}
         onClick={setisDisabledButton}

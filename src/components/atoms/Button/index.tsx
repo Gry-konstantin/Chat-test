@@ -2,14 +2,14 @@ import React from "react";
 import "./styles.scss";
 
 interface IButton {
-  textButton: string;
+  childrenButton: string;
   classButton: string;
   isDisabled: boolean;
   onClick: (value: boolean) => void;
 }
 
 export const Button: React.FC<IButton> = ({
-  textButton,
+  childrenButton,
   classButton,
   isDisabled,
   onClick,
@@ -20,7 +20,7 @@ export const Button: React.FC<IButton> = ({
       className={classButton}
       disabled={isDisabled}
     >
-      {textButton}
+      {childrenButton}
     </button>
   );
 };

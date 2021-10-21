@@ -1,11 +1,9 @@
 import React from "react";
 import "./styles.scss";
+import { regex } from "../../../constants/regex";
 
 interface IInput {
   classContainer: string;
-  classLabel: string;
-  classInput: string;
-  classWarning: string;
   warning?: string;
   value: string;
   onChange: (value: string) => void;
@@ -15,39 +13,33 @@ interface IInput {
 
 export const Input: React.FC<IInput> = ({
   classContainer,
-  classLabel,
-  classInput,
-  classWarning,
   warning,
   label,
   value,
   onChange,
   placeholder,
 }) => {
-  const regex = /[^a-zA-ZА-Яа-яЁё]/gi;
   const handleNameField = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.target.value.search(regex) !== -1
       ? event.target.parentElement?.classList.add(
-          "authorization__inputWrapper-warning"
+          `${classContainer}__inputWrapper-warning`
         )
       : event.target.parentElement?.classList.remove(
-          "authorization__inputWrapper-warning"
+          `${classContainer}__inputWrapper-warning`
         );
     onChange(event.target.value);
   };
 
   return (
-    <div className={classContainer}>
-      <p className={classLabel}>{label}</p>
+    <div className={`${classContainer}__inputWrapper`}>
+      <p className={`${classContainer}__label`}>{label}</p>
       <input
-        className={classInput}
+        className={`${classContainer}__input`}
         value={value}
         placeholder={placeholder}
-        onChange={(event) => {
-          handleNameField(event);
-        }}
+        onChange={handleNameField}
       />
-      <p className={classWarning}>{warning}</p>
+      <p className={`${classContainer}__warning`}>{warning}</p>
     </div>
   );
 };
