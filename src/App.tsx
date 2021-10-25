@@ -1,25 +1,25 @@
-import React, { useState } from "react";
-import { Input } from "./components/atoms/Input";
-import { Button } from "./components/atoms/Button";
-import { ReactComponent as ErrorIcon } from "./assets/WarningInput.svg";
+import React from "react";
+import { LoginTemplates } from "./components/templates/LoginTemplates";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 
 function App() {
-  const [inputValue, setInputValue] = useState<string>("");
-
   return (
-    <div className="authorization">
-      <Input
-        className="authorization"
-        errorMesage="Something goes wrong"
-        label="User name"
-        placeholder="Input user name"
-        value={inputValue}
-        onChange={setInputValue}
-      >
-        <ErrorIcon />
-      </Input>
-      <Button className="authorization__button">Log in</Button>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/login">
+          <LoginTemplates />
+        </Route>
+        <Route exact path="/home">
+          <div>HelloWorld</div>
+        </Route>
+        <Redirect from="/" to="/login" />
+      </Switch>
+    </Router>
   );
 }
 

@@ -1,0 +1,28 @@
+.template{
+    background-color: #EFF5FF;
+}
+.wrapper{
+    min-width: 950px;
+    max-width: 1440px;
+    width: 1440px;
+    margin-right: auto;
+    margin-left: auto;
+    & .main__item{
+        display: flex;
+    }
+    .item{
+        &__content{
+            width: calc(100% - 724px);
+            padding:256px 0 315px 121px;
+            background-color: #fff;
+        }
+        &__image{
+            background: #EFF5FF;
+            background-image: url('../../../assets/Frame.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            width:724px; 
+            min-width: 724px;    
+        }
+    }
+}

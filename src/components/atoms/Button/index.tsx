@@ -2,7 +2,7 @@ import React from "react";
 import "./styles.scss";
 
 interface IButton {
-  className?: string;
+  baseClass?: string;
   isDisabled?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   type?: "submit" | "button" | "reset";
@@ -11,13 +11,13 @@ interface IButton {
 export const Button: React.FC<IButton> = ({
   onClick,
   children,
-  className,
+  baseClass,
   isDisabled = false,
   type = "button",
 }) => {
   return (
     <button
-      className={className}
+      className={`button  ${baseClass}`}
       disabled={isDisabled}
       onClick={onClick}
       type={type}

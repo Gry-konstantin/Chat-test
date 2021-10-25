@@ -1,9 +1,8 @@
 import React from "react";
 import "./styles.scss";
-import { regex } from "../../../constants/regex";
 
 interface IInput {
-  className?: string;
+  baseClass?: string;
   errorMesage?: string;
   value: string;
   onChange: (value: string) => void;
@@ -13,7 +12,7 @@ interface IInput {
 }
 
 export const Input: React.FC<IInput> = ({
-  className = "",
+  baseClass = "",
   errorMesage,
   label,
   value,
@@ -27,7 +26,7 @@ export const Input: React.FC<IInput> = ({
 
   return (
     <div
-      className={`${className} container ${errorMesage && "container--error"}`}
+      className={`${baseClass} container ${errorMesage && "container--error"}`}
     >
       {label && <label className="container__label">{label}</label>}
       <div tabIndex={0} className="container__input">
@@ -36,7 +35,7 @@ export const Input: React.FC<IInput> = ({
           placeholder={placeholder}
           onChange={handleValueChange}
         />
-        <div className="container__image">{children}</div>
+        {errorMesage && <div className="container__image">{children}</div>}
       </div>
       {errorMesage && <p className="container__text--error">{errorMesage}</p>}
     </div>

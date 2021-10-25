@@ -1,37 +1,41 @@
-.container{
-  &__image{
+.container {
+  margin-bottom: 32px;
+  &__image {
     height: 20px;
   }
-  &--error{
-    & .container__input{
+  &--error {
+    & .container__input {
       border-color: #fb6262;
     }
   }
-  &__label{
+  &__label {
+    display: inline-block;
     font-weight: 600;
     font-size: 13px;
     line-height: 19px;
     color: #333333;
-    margin: 0 0 4px;
   }
-  &__text--error{
+  &__text--error {
     color: #fb6262;
     font-weight: 500;
     font-size: 13px;
     line-height: 19px;
     margin: 4px 0 0 5px;
   }
-  &__input{
+  &__input {
+    margin-top: 4px;
     width: 354px;
     display: flex;
     align-items: center;
     border: 1px solid #b3cdf8;
     border-radius: 8px;
     justify-content: start;
-    &:focus {
+    &:focus-within {
       border-color: #5c98f1;
     }
-    & input{
+    & input {
+      border-radius: 8px;
+      pointer-events: auto;
       width: 320px;
       ::placeholder {
         color: #9f9f9f;
@@ -44,11 +48,8 @@
       line-height: 23px;
       border: none;
       box-sizing: border-box;
-      height: 56px;
+      height: 55px;
       color: #333;
     }
   }
 }
-
-
-
