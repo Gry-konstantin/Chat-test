@@ -1,34 +1,52 @@
-.header{
-    &__logo{
-        width: 112px;
-        height: 42px;
-        & svg{
-            width: 100%;
-            height: 100%;
-        }
+$mobile: 968px;
+
+.header {
+  &__logo {
+    width: 112px;
+    height: 42px;
+    @media screen and (max-width: $mobile) {
+      width: 83.76px;
+      height: 32px;
     }
-    &__title{
-        padding: 16.21px 0 48px 0;
-        color: #333;
-        & h1{
-            margin: 0 0 24px 0;
-            font-weight: 800;
-            font-size: 42px;
-            line-height: 51px;
-            & span{
-                &:nth-child(1){
-                    color: #5e93e7;
-                }
-                &:nth-child(2){
-                    color: #b3cdf8;
-                }
-            }
-        }
-        & h2{
-            margin: 0px;
-            font-weight: bold;
-            font-size: 27px;
-            line-height: 33px;
-        }
+    & svg {
+      width: 100%;
+      height: 100%;
     }
+  }
+  &__title {
+    padding: 16.21px 0 48px 0;
+    color: #333;
+    @media screen and (max-width: $mobile) {
+      padding: 16px 0 24px 0;
+    }
+    & h1 {
+      margin: 0 0 24px 0;
+      font-weight: 800;
+      font-size: 42px;
+      line-height: 51px;
+      @media screen and (max-width: $mobile) {
+        font-size: 27px;
+        line-height: 33px;
+        margin-bottom: 8px;
+      }
+      & span {
+        &:nth-child(1) {
+          color: #5e93e7;
+        }
+        &:nth-child(2) {
+          color: #b3cdf8;
+        }
+      }
+    }
+    & h2 {
+      margin: 0px;
+      font-weight: bold;
+      font-size: 27px;
+      line-height: 33px;
+      @media screen and (max-width: $mobile) {
+        font-size: 16px;
+        line-height: 20px;
+      }
+    }
+  }
 }

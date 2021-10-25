@@ -1,3 +1,6 @@
+$mobile: 968px;
+
+
 .button {
   margin-top: 16px;
   background: #5c98f1;
@@ -8,6 +11,9 @@
   font-weight: 500;
   font-size: 15px;
   line-height: 23px;
+  @media screen and (max-width: $mobile) {
+    margin-top: 56px;
+  }
   color: #ffffff;
   &:hover {
     background: #4583de;

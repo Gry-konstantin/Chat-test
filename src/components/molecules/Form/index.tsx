@@ -22,7 +22,7 @@ export const Form = () => {
         </Input>
         <Input
           baseClass="authorization"
-          // errorMesage="Something goes wrong"
+          errorMesage="Something goes wrong"
           label="Password"
           placeholder="Input password"
           value={inputPasswordValue}

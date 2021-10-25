@@ -1,0 +1,7 @@
+$mobile: 968px;
+
+.form{
+    @media screen and (max-width: $mobile) {
+        padding-top: 76px;
+    }
+}

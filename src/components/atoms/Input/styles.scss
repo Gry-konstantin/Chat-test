@@ -1,5 +1,10 @@
+$mobile: 968px;
+
 .container {
   margin-bottom: 32px;
+  @media screen and (max-width: $mobile) {
+    margin-bottom:24px;
+  }
   &__image {
     height: 20px;
   }
@@ -30,6 +35,10 @@
     border: 1px solid #b3cdf8;
     border-radius: 8px;
     justify-content: start;
+    background-color: #fff;
+    @media screen and (max-width: $mobile) {
+      width:100%
+    }
     &:focus-within {
       border-color: #5c98f1;
     }
@@ -50,6 +59,10 @@
       box-sizing: border-box;
       height: 55px;
       color: #333;
+      @media screen and (max-width: $mobile) {
+        width: calc(100% - 30px);
+        height: 48px;
+      }
     }
   }
 }
