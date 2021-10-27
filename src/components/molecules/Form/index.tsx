@@ -5,22 +5,12 @@ import { Button } from "../../atoms/Button";
 import { ReactComponent as ErrorIcon } from "./../../../assets/WarningInput.svg";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 
 type UserSubmitForm = {
   username: string;
   password: string;
-  ref?: undefined;
-  type: string;
-};
-type ErrorUser = {
-  username: {
-    message: string;
-  };
-  password: {
-    message: string;
-  };
 };
 
 export const Form: React.FC = () => {
@@ -37,21 +27,16 @@ export const Form: React.FC = () => {
       .required("Required"),
   });
 
-  const { handleSubmit, setValue } = useForm({
+  const { handleSubmit, setValue, formState } = useForm({
     resolver: yupResolver(validationSchema),
   });
 
   const [inputNameValue, setInputNameValue] = useState<string>("");
   const [inputPasswordValue, setInputPasswordValue] = useState<string>("");
-  const [inputError, setInputError] = useState<ErrorUser>();
 
-  const onSubmit = (data: UserSubmitForm) => {
+  const onSubmit: SubmitHandler<UserSubmitForm> = (data) =>
     console.log(JSON.stringify(data, null, 2));
-  };
-  const onError = (errors: any) => {
-    setInputError(errors);
-    console.log(errors);
-  };
+  // const onError:SubmitErrorHandler<UserSubmitForm> = (errors) => console.log(errors)
 
   return (
     <div className="form">
@@ -59,15 +44,15 @@ export const Form: React.FC = () => {
         name="subscribeForm"
         method="post"
         encType="multipart/form-data"
-        onSubmit={handleSubmit(onSubmit, onError)}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <Input
           name="username"
           baseClass="authorization"
           errorMesage={
-            inputError &&
-            inputError.username &&
-            `${inputError.username.message}`
+            formState.errors &&
+            formState.errors.username &&
+            `${formState.errors.username.message}`
           }
           label="User name"
           placeholder="Input user name"
@@ -83,9 +68,9 @@ export const Form: React.FC = () => {
           name="password"
           baseClass="authorization"
           errorMesage={
-            inputError &&
-            inputError.password &&
-            `${inputError.password.message}`
+            formState.errors &&
+            formState.errors.password &&
+            `${formState.errors.password.message}`
           }
           label="Password"
           placeholder="Input password"
