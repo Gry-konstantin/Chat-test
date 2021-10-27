@@ -3,8 +3,6 @@ import { Header } from "../../molecules/Header";
 import { Form } from "../../molecules/Form";
 
 export const LoginForm: React.FC = () => {
-  const [inputValue, setInputValue] = useState<string>("");
-
   return (
     <div className="authorization">
       <Header

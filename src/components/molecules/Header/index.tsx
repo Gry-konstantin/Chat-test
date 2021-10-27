@@ -4,7 +4,7 @@ import { ReactComponent as Logotype } from "./../../../assets/logo.svg";
 
 interface IHeader {
   baseClass?: string;
-  title?: string[];
+  title?: string[] | string;
   subTitle?: string;
 }
 
@@ -19,11 +19,13 @@ export const Header: React.FC<IHeader> = ({
         <Logotype />
       </div>
       <div className="header__title">
-        <h1>
-          {title && title[0]}
-          <span>{title && title[1]}</span>
-          <span>{title && title[2]}</span>
-        </h1>
+        {title && (
+          <h1>
+            {title[0]}
+            <span>{title[1]}</span>
+            <span>{title[2]}</span>
+          </h1>
+        )}
         <h2>{subTitle}</h2>
       </div>
     </header>

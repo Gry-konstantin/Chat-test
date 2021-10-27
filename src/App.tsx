@@ -1,5 +1,5 @@
 import React from "react";
-import { LoginTemplates } from "./components/templates/LoginTemplates";
+import { LoginTemplates } from "./components/page/LoginTemplates";
 import {
   BrowserRouter as Router,
   Route,

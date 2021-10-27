@@ -1,7 +1,8 @@
-$mobile: 968px;
+@import '../../../assets/styles/variables.scss';
 
 .container {
-  margin-bottom: 32px;
+  margin-bottom: 9px;
+  min-height: 104px;
   @media screen and (max-width: $mobile) {
     margin-bottom:24px;
   }

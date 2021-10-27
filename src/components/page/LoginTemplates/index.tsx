@@ -1,6 +1,5 @@
 import React from "react";
 import { LoginForm } from "../../organisms/LoginForm";
-import Frame from "../../../assets/Frame.png";
 import "./styles.scss";
 
 export const LoginTemplates = () => {

@@ -1,11 +1,11 @@
-$mobile: 968px;
+@import '../../../assets/styles/variables.scss';
 
 .header {
   &__logo {
     width: 112px;
     height: 42px;
     @media screen and (max-width: $mobile) {
-      width: 83.76px;
+      width: 84px;
       height: 32px;
     }
     & svg {
@@ -14,7 +14,7 @@ $mobile: 968px;
     }
   }
   &__title {
-    padding: 16.21px 0 48px 0;
+    padding: 16px 0 48px 0;
     color: #333;
     @media screen and (max-width: $mobile) {
       padding: 16px 0 24px 0;

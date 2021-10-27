@@ -2,6 +2,7 @@ import React from "react";
 import "./styles.scss";
 
 interface IInput {
+  name?: string;
   baseClass?: string;
   errorMesage?: string;
   value: string;
@@ -9,9 +10,13 @@ interface IInput {
   label?: string;
   placeholder?: string;
   isError?: boolean;
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  ref?: HTMLInputElement;
+  type?: string;
 }
 
 export const Input: React.FC<IInput> = ({
+  name,
   baseClass = "",
   errorMesage,
   label,
@@ -19,6 +24,7 @@ export const Input: React.FC<IInput> = ({
   onChange,
   placeholder,
   children,
+  type,
 }) => {
   const handleValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
@@ -31,9 +37,11 @@ export const Input: React.FC<IInput> = ({
       {label && <label className="container__label">{label}</label>}
       <div tabIndex={0} className="container__input">
         <input
+          name={name}
           value={value}
           placeholder={placeholder}
           onChange={handleValueChange}
+          type={type}
         />
         {errorMesage && <div className="container__image">{children}</div>}
       </div>
