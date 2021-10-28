@@ -1,10 +1,10 @@
-@import '../../../assets/styles/variables.scss';
+@import "../../../assets/styles/variables.scss";
 
 .container {
   margin-bottom: 9px;
   min-height: 104px;
   @media screen and (max-width: $mobile) {
-    margin-bottom:24px;
+    margin-bottom: 24px;
   }
   &__image {
     height: 20px;
@@ -38,7 +38,7 @@
     justify-content: start;
     background-color: #fff;
     @media screen and (max-width: $mobile) {
-      width:100%
+      width: 100%;
     }
     &:focus-within {
       border-color: #5c98f1;
@@ -48,7 +48,7 @@
       pointer-events: auto;
       width: 320px;
       ::placeholder {
-        color: #9f9f9f;
+        color: #0e0808;
         font-size: 15px;
         line-height: 23px;
       }

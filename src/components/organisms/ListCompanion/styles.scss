@@ -1,0 +1,25 @@
+.list {
+  width: 362px;
+  border-right: 1px solid #88abe3;
+  height: 100%;
+  position: relative;
+}
+.alone{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  &__image{
+    width: 200px;
+    height: 200px;
+    background-image: url('../../../assets/alone.png');
+  }
+  &__text{
+    padding-top: 24px;
+    width: max-content;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: #303030;
+  }
+}

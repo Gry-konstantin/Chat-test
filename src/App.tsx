@@ -1,26 +1,8 @@
 import React from "react";
-import { LoginTemplates } from "./components/page/LoginTemplates";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+import { Routes } from "./routes";
 
 function App() {
-  return (
-    <Router>
-      <Switch>
-        <Route exact path="/login">
-          <LoginTemplates />
-        </Route>
-        <Route exact path="/home">
-          <div>HelloWorld</div>
-        </Route>
-        <Redirect from="/" to="/login" />
-      </Switch>
-    </Router>
-  );
+  return <Routes />;
 }
 
 export default App;

@@ -1,0 +1,28 @@
+.chat-wrapper {
+  width: 100%;
+  height: calc(100vh - 81px);
+  min-height: 500px;
+  position: relative;
+  background-image: url("../../../assets/bgchat.png");
+  &__text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid #5E93E7;
+    box-sizing: border-box;
+    border-radius: 32px;
+    width: 339px;
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & span{
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 18px;
+      color: #333333;
+    }
+  }
+}

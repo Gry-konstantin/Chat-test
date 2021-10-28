@@ -34,8 +34,10 @@ export const Form: React.FC = () => {
   const [inputNameValue, setInputNameValue] = useState<string>("");
   const [inputPasswordValue, setInputPasswordValue] = useState<string>("");
 
-  const onSubmit: SubmitHandler<UserSubmitForm> = (data) =>
+  const onSubmit: SubmitHandler<UserSubmitForm> = (data) => {
     console.log(JSON.stringify(data, null, 2));
+    location.href = "/";
+  };
   // const onError:SubmitErrorHandler<UserSubmitForm> = (errors) => console.log(errors)
 
   return (

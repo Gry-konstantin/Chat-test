@@ -1,5 +1,4 @@
-@import '../../../assets/styles/variables.scss';
-
+@import "../../../assets/styles/variables.scss";
 
 .template {
   background-color: #eff5ff;
@@ -14,8 +13,8 @@
   margin-right: auto;
   margin-left: auto;
   @media screen and (max-width: $desktop) {
-      width: 100%;
-      min-width:auto;
+    width: 100%;
+    min-width: auto;
   }
   & .main__item {
     position: relative;
@@ -30,7 +29,7 @@
         width: 50%;
       }
       @media screen and (max-width: $mobile) {
-        padding:183px 13px 24px 14px;
+        padding: 183px 13px 24px 14px;
         width: 100%;
         background-color: inherit;
         z-index: 2;
@@ -45,7 +44,7 @@
       min-width: 724px;
       @media screen and (max-width: $desktop) {
         width: 50%;
-        min-width:auto;
+        min-width: auto;
       }
       @media screen and (max-width: $mobile) {
         position: absolute;
