@@ -13,28 +13,34 @@ type UserSubmitForm = {
   password: string;
 };
 
-export const Form: React.FC = () => {
-  const validationSchema = yup.object().shape({
-    username: yup
-      .string()
-      .min(6, "Username must be at least 6 characters")
-      .max(20, "Username must not exceed 20 characters")
-      .required("Required"),
-    password: yup
-      .string()
-      .min(6, "Password must be at least 6 characters")
-      .max(20, "Password must not exceed 20 characters")
-      .required("Required"),
-  });
+const validationSchema = yup.object().shape({
+  username: yup
+    .string()
+    .required("Required")
+    .min(6, "Username must be at least 6 characters")
+    .max(20, "Username must not exceed 20 characters"),
+  password: yup
+    .string()
+    .required("Required")
+    .min(6, "Password must be at least 6 characters")
+    .max(20, "Password must not exceed 20 characters"),
+});
 
+export const Form: React.FC = () => {
   const {
     handleSubmit,
     setValue,
-    getValues,
+    watch,
     formState: { errors },
   } = useForm({
+    defaultValues: {
+      username: "",
+      password: "",
+    },
     resolver: yupResolver(validationSchema),
   });
+  const username = watch("username");
+  const password = watch("password");
 
   const onSubmit: SubmitHandler<UserSubmitForm> = (data) => {
     console.log(JSON.stringify(data, null, 2));
@@ -55,7 +61,7 @@ export const Form: React.FC = () => {
           errorMesage={errors.username?.message}
           label="User name"
           placeholder="Input user name"
-          value={getValues("username")}
+          value={username}
           onChange={(value: string) => {
             setValue("username", value);
           }}
@@ -68,7 +74,7 @@ export const Form: React.FC = () => {
           errorMesage={errors.password?.message}
           label="Password"
           placeholder="Input password"
-          value={getValues("password")}
+          value={password}
           onChange={(value: string) => {
             setValue("password", value);
           }}
