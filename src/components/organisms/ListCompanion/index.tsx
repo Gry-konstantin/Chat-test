@@ -1,5 +1,5 @@
 import React from "react";
-import { Companion } from "../../molecules/Сompanion";
+import { DialogItem } from "../../molecules/DialogItem";
 import "./styles.scss";
 
 interface IListItem {
@@ -16,7 +16,7 @@ export const ListCompanion: React.FC<IListItem> = ({ companionArray }) => {
     <div className="list">
       {companionArray ? (
         companionArray.map((item) => (
-          <Companion
+          <DialogItem
             key={item.id}
             name={item.name}
             lastMessage={item.lastMessage}

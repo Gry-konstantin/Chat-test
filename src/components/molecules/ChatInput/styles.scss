@@ -1,29 +1,29 @@
-.chatinput{
-    position: absolute;
-    bottom: 0px;
-    width: 100%;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    border-top: 1px solid #D7E6FF;
-    padding:0 25px;
-    box-sizing: border-box;
-    & input{
-        margin-left:32px;
-        width: calc(100% - 70px);
-        border: none;
-        height: 100%;
-        outline: none;
-        font-size: 15px;
-        line-height: 23px;
-        font-family: Montserrat;
-        &::placeholder {
-            color: #CACACA;
-            font-family: Montserrat;
-            font-size: 15px;
-            line-height: 23px;
-        }
+.chatinput {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-top: 1px solid #d7e6ff;
+  padding: 0 25px;
+  box-sizing: border-box;
+  & input {
+    margin-left: 32px;
+    width: calc(100% - 70px);
+    border: none;
+    height: calc(100% - 1px);
+    outline: none;
+    font-size: 15px;
+    line-height: 23px;
+    font-family: Montserrat;
+    &::placeholder {
+      color: #cacaca;
+      font-family: Montserrat;
+      font-size: 15px;
+      line-height: 23px;
     }
+  }
 }

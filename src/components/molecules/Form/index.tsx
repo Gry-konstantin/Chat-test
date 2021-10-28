@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./styles.scss";
 import { Input } from "../../atoms/Input";
 import { Button } from "../../atoms/Button";
@@ -27,18 +27,19 @@ export const Form: React.FC = () => {
       .required("Required"),
   });
 
-  const { handleSubmit, setValue, formState } = useForm({
+  const {
+    handleSubmit,
+    setValue,
+    getValues,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(validationSchema),
   });
 
-  const [inputNameValue, setInputNameValue] = useState<string>("");
-  const [inputPasswordValue, setInputPasswordValue] = useState<string>("");
-
   const onSubmit: SubmitHandler<UserSubmitForm> = (data) => {
     console.log(JSON.stringify(data, null, 2));
-    location.href = "/";
+    location.href = "/home";
   };
-  // const onError:SubmitErrorHandler<UserSubmitForm> = (errors) => console.log(errors)
 
   return (
     <div className="form">
@@ -51,17 +52,12 @@ export const Form: React.FC = () => {
         <Input
           name="username"
           baseClass="authorization"
-          errorMesage={
-            formState.errors &&
-            formState.errors.username &&
-            `${formState.errors.username.message}`
-          }
+          errorMesage={errors.username?.message}
           label="User name"
           placeholder="Input user name"
-          value={inputNameValue}
+          value={getValues("username")}
           onChange={(value: string) => {
             setValue("username", value);
-            setInputNameValue(value);
           }}
         >
           <ErrorIcon />
@@ -69,17 +65,12 @@ export const Form: React.FC = () => {
         <Input
           name="password"
           baseClass="authorization"
-          errorMesage={
-            formState.errors &&
-            formState.errors.password &&
-            `${formState.errors.password.message}`
-          }
+          errorMesage={errors.password?.message}
           label="Password"
           placeholder="Input password"
-          value={inputPasswordValue}
+          value={getValues("password")}
           onChange={(value: string) => {
             setValue("password", value);
-            setInputPasswordValue(value);
           }}
           type="password"
         >

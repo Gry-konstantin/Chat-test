@@ -1,4 +1,4 @@
 export enum SCREENS {
   SCREEN_SIGNUP = "/signup",
-  SCREEN_MAIN = "/",
+  SCREEN_MAIN = "/home",
 }

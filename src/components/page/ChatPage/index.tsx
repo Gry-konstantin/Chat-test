@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { HeaderChats } from "../../molecules/HeaderChats";
 import { ListCompanion } from "../../organisms/ListCompanion";
-import { Companion } from "../../molecules/Сompanion";
+import { DialogItem } from "../../molecules/DialogItem";
 import { ChatWrapper } from "../../organisms/ChatWrapper";
 import "./styles.scss";
 
@@ -15,6 +15,45 @@ const data = [
     male: true,
     status: "Last seen 3 minutes ago",
     message: [
+      {
+        itsMe: true,
+        text: "HelloworldHelloworld HelloworldHelloworldHelloworld Helloworld",
+      },
+      {
+        itsMe: false,
+        text: "HelloworldHelloworld HelloworldHelloworldHelloworld Helloworld",
+      },
+      {
+        itsMe: true,
+        title: "Helloworld",
+        size: "4.2 MB",
+      },
+      {
+        itsMe: true,
+        text: "HelloworldHelloworld HelloworldHelloworldHelloworld Helloworld",
+      },
+      {
+        itsMe: false,
+        text: "HelloworldHelloworld HelloworldHelloworldHelloworld Helloworld",
+      },
+      {
+        itsMe: true,
+        title: "Helloworld",
+        size: "4.2 MB",
+      },
+      {
+        itsMe: true,
+        text: "HelloworldHelloworld HelloworldHelloworldHelloworld Helloworld",
+      },
+      {
+        itsMe: false,
+        text: "HelloworldHelloworld HelloworldHelloworldHelloworld Helloworld",
+      },
+      {
+        itsMe: true,
+        title: "Helloworld",
+        size: "4.2 MB",
+      },
       {
         itsMe: true,
         text: "HelloworldHelloworld HelloworldHelloworldHelloworld Helloworld",
@@ -66,7 +105,7 @@ export const ChatPage = () => {
           <div className="list">
             {data ? (
               data.map((item) => (
-                <Companion
+                <DialogItem
                   key={item.id}
                   name={item.name}
                   lastMessage={item.lastMessage}

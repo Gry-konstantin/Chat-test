@@ -3,7 +3,7 @@ import "./styles.scss";
 import { ReactComponent as Male } from "./../../../assets/male.svg";
 import { ReactComponent as Female } from "./../../../assets/female.svg";
 
-interface ICompanion {
+interface IDialogItem {
   baseClass?: string;
   name?: string;
   lastMessage?: string;
@@ -11,7 +11,7 @@ interface ICompanion {
   onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export const Companion: React.FC<ICompanion> = ({
+export const DialogItem: React.FC<IDialogItem> = ({
   onClick,
   name = "Konstantin Konstantinopolski",
   baseClass = "",

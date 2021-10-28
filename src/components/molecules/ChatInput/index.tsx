@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.scss";
 import { ChatButton } from "../../atoms/ChatButton";
-import { ReactComponent as Send } from "../../../assets/send.svg";
+import { ChatInputAddFile } from "../../atoms/ChatInputAddFile";
 import { ReactComponent as AddFile } from "../../../assets/addFile.svg";
+import { ReactComponent as Send } from "../../../assets/send.svg";
 
 interface IChatInput {
   baseClass?: string;
@@ -23,8 +24,15 @@ export const ChatInput: React.FC<IChatInput> = ({
     onChange(event.target.value);
   };
 
+  const [inputFileValue, setInputNameValue] = useState<string>("");
+
   return (
     <div tabIndex={0} className={`chatinput ${baseClass}`}>
+      {/* <ChatInputAddFile
+        value={inputFileValue}
+        onChange={setInputNameValue}
+        type = "file"
+      /> */}
       <ChatButton>
         <AddFile />
       </ChatButton>

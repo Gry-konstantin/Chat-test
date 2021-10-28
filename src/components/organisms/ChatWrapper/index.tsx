@@ -24,11 +24,6 @@ interface ILoader {
 }
 
 export const ChatWrapper: React.FC<ILoader> = ({ loader, selected }) => {
-  selected &&
-    selected.message &&
-    selected.message.map((item) => {
-      console.log(item.itsMe);
-    });
   const [inputNameValue, setInputNameValue] = useState<string>("");
   return (
     <div className="chat-wrapper">
