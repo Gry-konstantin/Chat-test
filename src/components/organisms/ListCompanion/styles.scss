@@ -4,17 +4,17 @@
   height: 100%;
   position: relative;
 }
-.alone{
+.alone {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
-  &__image{
+  transform: translate(-50%, -50%);
+  &__image {
     width: 200px;
     height: 200px;
-    background-image: url('../../../assets/alone.png');
+    background-image: url("../../../assets/alone.png");
   }
-  &__text{
+  &__text {
     padding-top: 24px;
     width: max-content;
     font-weight: 500;
