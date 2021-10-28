@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { HeaderChats } from "../../molecules/HeaderChats";
-import { ListCompanion } from "../../organisms/ListCompanion";
 import { DialogItem } from "../../molecules/DialogItem";
 import { ChatWrapper } from "../../organisms/ChatWrapper";
 import "./styles.scss";
@@ -94,7 +93,7 @@ interface IListItem {
   male?: boolean;
 }
 
-export const ChatPage = () => {
+export const ChatPage: React.FC = () => {
   const [isLoader, setIsLoader] = useState<boolean>(false);
   const [selectCompanion, setSelectCompanion] = useState<IListItem>();
   return (
@@ -103,13 +102,11 @@ export const ChatPage = () => {
       <div className="main">
         <div className="main__aside">
           <div className="list">
-            {data ? (
+            {data.length > 0 ? (
               data.map((item) => (
                 <DialogItem
                   key={item.id}
-                  name={item.name}
-                  lastMessage={item.lastMessage}
-                  male={item.male}
+                  {...item}
                   onClick={() => setSelectCompanion(item)}
                 />
               ))
