@@ -6,7 +6,7 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import { LoginTemplates } from "../components/page/LoginTemplates";
+import { LoginPage } from "../components/page/LoginPage";
 import { SCREENS } from "./endpoints";
 import { ChatPage } from "../components/page/ChatPage";
 
@@ -15,12 +15,16 @@ export const Routes: React.FC = () => {
     <Router>
       <Switch>
         <Route exact path={[SCREENS.SCREEN_SIGNUP]}>
-          <LoginTemplates />
+          <LoginPage />
         </Route>
         <Route exact path={[SCREENS.SCREEN_MAIN]}>
           <ChatPage />
         </Route>
-        <Redirect strict from="/" to="/signup" />
+        <Redirect
+          strict
+          from={SCREENS.SCREEN_MAIN}
+          to={SCREENS.SCREEN_SIGNUP}
+        />
       </Switch>
     </Router>
   );

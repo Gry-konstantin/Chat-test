@@ -4,8 +4,6 @@ import { DialogItem } from "../../molecules/DialogItem";
 import { ChatWrapper } from "../../organisms/ChatWrapper";
 import "./styles.scss";
 
-import "../../organisms/ListCompanion/styles.scss";
-
 const data = [
   {
     id: 1,

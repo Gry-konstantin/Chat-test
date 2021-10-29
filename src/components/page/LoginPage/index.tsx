@@ -2,7 +2,7 @@ import React from "react";
 import { LoginForm } from "../../organisms/LoginForm";
 import "./styles.scss";
 
-export const LoginTemplates = () => {
+export const LoginPage = () => {
   return (
     <div className="template">
       <div className="wrapper">

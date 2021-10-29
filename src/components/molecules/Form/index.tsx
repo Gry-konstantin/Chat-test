@@ -3,7 +3,7 @@ import "./styles.scss";
 import { Input } from "../../atoms/Input";
 import { Button } from "../../atoms/Button";
 import { ReactComponent as ErrorIcon } from "./../../../assets/WarningInput.svg";
-
+import { SCREENS } from "../../../routes/endpoints";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
@@ -44,7 +44,7 @@ export const Form: React.FC = () => {
 
   const onSubmit: SubmitHandler<UserSubmitForm> = (data) => {
     console.log(JSON.stringify(data, null, 2));
-    location.href = "/home";
+    location.href = `${SCREENS.SCREEN_MAIN}`;
   };
 
   return (
