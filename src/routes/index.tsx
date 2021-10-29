@@ -22,7 +22,7 @@ export const Routes: React.FC = () => {
         </Route>
         <Redirect
           strict
-          from={SCREENS.SCREEN_MAIN}
+          from={SCREENS.SCREEN_STARTPAGE}
           to={SCREENS.SCREEN_SIGNUP}
         />
       </Switch>
