@@ -3,10 +3,11 @@ import { HeaderChats } from "../../molecules/HeaderChats";
 import { DialogItem } from "../../molecules/DialogItem";
 import { ChatWrapper } from "../../organisms/ChatWrapper";
 import "./styles.scss";
+import { IListItem } from "../../../utils/types";
 
 const data = [
   {
-    id: 1,
+    id: 0,
     name: "Konstantin",
     lastMessage: "hello",
     male: true,
@@ -67,7 +68,7 @@ const data = [
     ],
   },
   {
-    id: 2,
+    id: 1,
     name: "Andrey",
     lastMessage: "hey",
     status: "Last seen 3 minutes ago",
@@ -84,13 +85,6 @@ const data = [
   },
 ];
 
-interface IListItem {
-  id: number;
-  name: string;
-  lastMessage: string;
-  male?: boolean;
-}
-
 export const ChatPage: React.FC = () => {
   const [isLoader, setIsLoader] = useState<boolean>(false);
   const [selectCompanion, setSelectCompanion] = useState<IListItem>();
@@ -101,8 +95,13 @@ export const ChatPage: React.FC = () => {
         <div className="main__aside">
           <div className="list">
             {data.length > 0 ? (
-              data.map((item) => (
+              data.map((item, index) => (
                 <DialogItem
+                  baseClass={
+                    selectCompanion && selectCompanion.id === index
+                      ? "active"
+                      : ""
+                  }
                   key={item.id}
                   {...item}
                   onClick={() => setSelectCompanion(item)}

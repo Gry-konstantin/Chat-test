@@ -6,6 +6,7 @@ import { ReactComponent as ErrorIcon } from "./../../../assets/WarningInput.svg"
 import { SCREENS } from "../../../routes/endpoints";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 import * as yup from "yup";
 
 type UserSubmitForm = {
@@ -41,10 +42,10 @@ export const Form: React.FC = () => {
   });
   const username = watch("username");
   const password = watch("password");
-
+  const history = useHistory();
   const onSubmit: SubmitHandler<UserSubmitForm> = (data) => {
     console.log(JSON.stringify(data, null, 2));
-    location.href = `${SCREENS.SCREEN_MAIN}`;
+    history.push(SCREENS.SCREEN_MAIN);
   };
 
   return (

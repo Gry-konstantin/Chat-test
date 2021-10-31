@@ -8,7 +8,7 @@ interface IDialogItem {
   name?: string;
   lastMessage?: string;
   male?: boolean;
-  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
+  onClick?: () => void;
 }
 
 export const DialogItem: React.FC<IDialogItem> = ({

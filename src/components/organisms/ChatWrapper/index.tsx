@@ -5,25 +5,26 @@ import { Message } from "../../atoms/Message";
 import { ChatInfo } from "../../atoms/ChatInfo";
 import { ChatInput } from "../../molecules/ChatInput";
 
-interface IListItem {
+interface IMessage {
+  itsMe: boolean;
+  text: string;
+  type?: string;
+  title?: string;
+  size?: string;
+}
+type ListItem = {
   id: number;
   name: string;
   lastMessage: string;
   male?: boolean;
-  message?: {
-    itsMe: boolean;
-    text: string;
-    type?: string;
-    title?: string;
-    size?: string;
-  }[];
-}
-interface ILoader {
+  message?: IMessage[];
+};
+interface IChatWrapper {
   loader: boolean;
-  selected?: IListItem;
+  selected?: ListItem;
 }
 
-export const ChatWrapper: React.FC<ILoader> = ({ loader, selected }) => {
+export const ChatWrapper: React.FC<IChatWrapper> = ({ loader, selected }) => {
   const anchorMessage = useRef<null | HTMLDivElement>(null);
   const [inputNameValue, setInputNameValue] = useState<string>("");
 
@@ -32,23 +33,19 @@ export const ChatWrapper: React.FC<ILoader> = ({ loader, selected }) => {
       anchorMessage.current.scrollIntoView({ behavior: "smooth" });
   });
 
+  if (loader) {
+    return <Loading />;
+  }
+
   return (
     <div className="chat-wrapper">
-      {loader ? (
-        <Loading />
-      ) : selected ? (
+      {selected ? (
         <>
           <ChatInfo title={selected.name} status={selected.lastMessage} />
           <div className="message-wrapper">
             {selected.message &&
               selected.message.map((infoMessage, index) => (
-                <Message
-                  key={index}
-                  itsMe={infoMessage.itsMe}
-                  text={infoMessage.text}
-                  title={infoMessage.title}
-                  size={infoMessage.size}
-                ></Message>
+                <Message key={index} {...infoMessage} />
               ))}
             <div ref={anchorMessage} />
           </div>

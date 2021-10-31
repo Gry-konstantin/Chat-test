@@ -3,13 +3,13 @@ import "./styles.scss";
 import { ReactComponent as Logotype } from "./../../../assets/logo.svg";
 import { ReactComponent as Chaticon } from "./../../../assets/chaticon.svg";
 
-interface IHeader {
+interface IHeaderChats {
   baseClass?: string;
   title?: string[] | string;
   subTitle?: string;
 }
 
-export const HeaderChats: React.FC<IHeader> = ({ baseClass = "" }) => {
+export const HeaderChats: React.FC<IHeaderChats> = ({ baseClass = "" }) => {
   return (
     <header className={`headerChat ${baseClass}`}>
       <div className="headerChat__logo">

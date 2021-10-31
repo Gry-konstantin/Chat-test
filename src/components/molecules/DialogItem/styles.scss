@@ -3,6 +3,7 @@
   display: flex;
   padding: 12px 0 12px 24px;
   cursor: pointer;
+  box-sizing: border-box;
   &__icon {
     width: 48px;
     height: 48px;
@@ -14,18 +15,40 @@
   &__text {
     padding-left: 12px;
   }
-}
-.text {
-  &__name {
-    margin: 5px 0 4px;
-    font-weight: bold;
-    font-size: 15px;
-    line-height: 18px;
-    color: #333;
+  & .text {
+    &__name {
+      margin: 5px 0 4px;
+      font-weight: bold;
+      font-size: 15px;
+      line-height: 18px;
+      color: #333;
+    }
+    &__lastMessage {
+      font-size: 14px;
+      line-height: 17px;
+      color: #949494;
+    }
   }
-  &__lastMessage {
-    font-size: 14px;
-    line-height: 17px;
-    color: #949494;
+  &:hover {
+    background-color: #5c98f1;
+    & .text {
+      &__name {
+        color: #fff;
+      }
+      &__lastMessage {
+        color: #fff;
+      }
+    }
+  }
+  &.active {
+    background-color: #5c98f1;
+    & .text {
+      &__name {
+        color: #fff;
+      }
+      &__lastMessage {
+        color: #fff;
+      }
+    }
   }
 }
