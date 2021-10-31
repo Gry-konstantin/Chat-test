@@ -24,15 +24,8 @@ export const ChatInput: React.FC<IChatInput> = ({
     onChange(event.target.value);
   };
 
-  const [inputFileValue, setInputNameValue] = useState<string>("");
-
   return (
     <div tabIndex={0} className={`chatinput ${baseClass}`}>
-      {/* <ChatInputAddFile
-        value={inputFileValue}
-        onChange={setInputNameValue}
-        type = "file"
-      /> */}
       <ChatButton>
         <AddFile />
       </ChatButton>

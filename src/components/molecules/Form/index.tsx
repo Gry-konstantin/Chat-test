@@ -7,25 +7,12 @@ import { SCREENS } from "../../../routes/endpoints";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import * as yup from "yup";
+import { validationSchema } from "../../../utils/validations";
 
 type UserSubmitForm = {
   username: string;
   password: string;
 };
-
-const validationSchema = yup.object().shape({
-  username: yup
-    .string()
-    .required("Required")
-    .min(6, "Username must be at least 6 characters")
-    .max(20, "Username must not exceed 20 characters"),
-  password: yup
-    .string()
-    .required("Required")
-    .min(6, "Password must be at least 6 characters")
-    .max(20, "Password must not exceed 20 characters"),
-});
 
 export const Form: React.FC = () => {
   const {

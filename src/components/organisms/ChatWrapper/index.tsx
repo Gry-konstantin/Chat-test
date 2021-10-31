@@ -4,24 +4,11 @@ import { Loading } from "../../atoms/Loading";
 import { Message } from "../../atoms/Message";
 import { ChatInfo } from "../../atoms/ChatInfo";
 import { ChatInput } from "../../molecules/ChatInput";
+import { Dialog } from "../../../utils/types";
 
-interface IMessage {
-  itsMe: boolean;
-  text: string;
-  type?: string;
-  title?: string;
-  size?: string;
-}
-type ListItem = {
-  id: number;
-  name: string;
-  lastMessage: string;
-  male?: boolean;
-  message?: IMessage[];
-};
 interface IChatWrapper {
   loader: boolean;
-  selected?: ListItem;
+  selected?: Dialog;
 }
 
 export const ChatWrapper: React.FC<IChatWrapper> = ({ loader, selected }) => {
