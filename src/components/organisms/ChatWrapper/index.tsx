@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./styles.scss";
 import { Loading } from "../../atoms/Loading";
 import { Message } from "../../atoms/Message";
@@ -24,7 +24,14 @@ interface ILoader {
 }
 
 export const ChatWrapper: React.FC<ILoader> = ({ loader, selected }) => {
+  const anchorMessage = useRef<null | HTMLDivElement>(null);
   const [inputNameValue, setInputNameValue] = useState<string>("");
+
+  useEffect(() => {
+    anchorMessage.current &&
+      anchorMessage.current.scrollIntoView({ behavior: "smooth" });
+  });
+
   return (
     <div className="chat-wrapper">
       {loader ? (
@@ -43,6 +50,7 @@ export const ChatWrapper: React.FC<ILoader> = ({ loader, selected }) => {
                   size={infoMessage.size}
                 ></Message>
               ))}
+            <div ref={anchorMessage} />
           </div>
           <ChatInput
             value={inputNameValue}
