@@ -8,10 +8,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { validationSchema } from "../../../utils/validations";
+import { Selector } from "../../atoms/Select";
 
 type UserSubmitForm = {
   username: string;
   password: string;
+  captcha: string;
 };
 
 export const Form: React.FC = () => {
@@ -24,15 +26,17 @@ export const Form: React.FC = () => {
     defaultValues: {
       username: "",
       password: "",
+      captcha: "",
     },
     resolver: yupResolver(validationSchema),
   });
   const username = watch("username");
   const password = watch("password");
-  const history = useHistory();
+  const captcha = watch("captcha");
+  // const history = useHistory();
   const onSubmit: SubmitHandler<UserSubmitForm> = (data) => {
     console.log(JSON.stringify(data, null, 2));
-    history.push(SCREENS.SCREEN_MAIN);
+    // history.push(SCREENS.SCREEN_MAIN);
   };
 
   return (
@@ -70,6 +74,22 @@ export const Form: React.FC = () => {
         >
           <ErrorIcon />
         </Input>
+
+        <Input
+          name="captcha"
+          baseClass="captchaAuthorization"
+          errorMesage={errors.captcha?.message}
+          label="Security code"
+          placeholder="Security code"
+          value={captcha}
+          onChange={(value: string) => {
+            setValue("captcha", value);
+          }}
+          imgsrc={`http://109.194.37.212:93/api/auth/captcha?t=${Date()}`}
+        >
+          <ErrorIcon />
+        </Input>
+        <Selector />
         <Button baseClass="authorization__button" type="submit">
           Log in
         </Button>

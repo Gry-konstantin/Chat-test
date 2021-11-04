@@ -67,3 +67,10 @@
     }
   }
 }
+.captchaAuthorization{
+  &.container{
+    &__input {
+      display: none;
+    }
+  }
+}

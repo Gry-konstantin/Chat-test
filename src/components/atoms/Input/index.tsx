@@ -13,6 +13,7 @@ interface IInput {
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
   ref?: HTMLInputElement;
   type?: string;
+  imgsrc?: string;
 }
 
 export const Input: React.FC<IInput> = ({
@@ -25,6 +26,7 @@ export const Input: React.FC<IInput> = ({
   placeholder,
   children,
   type,
+  imgsrc,
 }) => {
   const handleValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
@@ -32,7 +34,9 @@ export const Input: React.FC<IInput> = ({
 
   return (
     <div
-      className={`${baseClass} container ${errorMesage && "container--error"}`}
+      className={`${baseClass} container ${
+        errorMesage ? "container--error" : ""
+      }`}
     >
       {label && <label className="container__label">{label}</label>}
       <div tabIndex={0} className="container__input">
@@ -45,6 +49,7 @@ export const Input: React.FC<IInput> = ({
         />
         {errorMesage && <div className="container__image">{children}</div>}
       </div>
+      {imgsrc && <img src={imgsrc} />}
       {errorMesage && <p className="container__text--error">{errorMesage}</p>}
     </div>
   );

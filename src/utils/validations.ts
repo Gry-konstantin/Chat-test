@@ -10,4 +10,9 @@ export const validationSchema = yup.object().shape({
     .required("Required")
     .min(6, "Password must be at least 6 characters")
     .max(20, "Password must not exceed 20 characters"),
+  captcha: yup
+    .string()
+    .required("Required")
+    .min(2, "Username must be at least 6 characters")
+    .max(20, "Username must not exceed 20 characters"),
 });
