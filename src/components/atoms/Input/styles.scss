@@ -74,8 +74,8 @@
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
-  .container{
-    &__input{
+  .container {
+    &__input {
       width: calc(50% - 7px);
       display: inline-flex;
       box-sizing: border-box;
@@ -83,24 +83,24 @@
       height: 57px;
       margin-right: 12px;
     }
-    &__label{
+    &__label {
       width: 100%;
     }
   }
-  .captcha{
-    &__refresh{
+  .captcha {
+    &__refresh {
       display: flex;
       align-items: center;
       position: absolute;
       top: 50%;
       right: -12px;
-      transform: translate(100%, -50% );
+      transform: translate(100%, -50%);
       @media screen and (max-width: $mobile) {
         right: 14px;
-        transform: translate( 0%, -50%);
+        transform: translate(0%, -50%);
       }
     }
-    &__image{
+    &__image {
       width: calc(50% - 7px);
       position: relative;
       display: inline-block;
@@ -113,7 +113,7 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
         max-height: 90%;
         max-width: 90%;
       }

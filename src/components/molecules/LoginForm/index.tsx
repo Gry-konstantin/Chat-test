@@ -112,7 +112,11 @@ export const LoginForm: React.FC = () => {
         <Button baseClass="authorization__button" type="submit">
           Log in
         </Button>
-        <Button baseClass="authorization__button" type="button">
+        <Button
+          baseClass="authorization__button"
+          type="button"
+          onClick={() => history.push(SCREENS.SCREEN_SIGNUP)}
+        >
           Registration
         </Button>
       </form>

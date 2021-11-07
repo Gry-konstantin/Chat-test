@@ -26,11 +26,11 @@
   &:disabled {
     background: #d1d1d1;
   }
-  &[type="button"]{
+  &[type="button"] {
     background-color: #fff;
-    border: 1px solid #5C98F1;
+    border: 1px solid #5c98f1;
     box-sizing: border-box;
-    color: #5C98F1;
+    color: #5c98f1;
     @media screen and (max-width: $mobile) {
       margin-top: 9px;
     }

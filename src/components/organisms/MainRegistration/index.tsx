@@ -1,6 +1,6 @@
 import React from "react";
 import { Header } from "../../molecules/Header";
-import { RefistrationForm } from "../../molecules/RefistrationForm";
+import { RefistrationForm } from "../../molecules/RegistrationForm";
 
 export const MainRegistration: React.FC = () => {
   return (

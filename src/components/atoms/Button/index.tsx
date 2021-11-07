@@ -4,7 +4,7 @@ import "./styles.scss";
 interface IButton {
   baseClass?: string;
   isDisabled?: boolean;
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: () => void;
   type?: "submit" | "button" | "reset";
 }
 

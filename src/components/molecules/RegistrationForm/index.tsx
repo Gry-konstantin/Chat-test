@@ -156,14 +156,14 @@ export const RefistrationForm: React.FC = () => {
           <ErrorIcon />
         </Input>
         <Button baseClass="authorization__button" type="submit">
-          Log in
+          Registration
         </Button>
         <Button
           baseClass="authorization__button"
           type="button"
-          onClick={(e) => console.log(e)}
+          onClick={() => history.push(SCREENS.SCREEN_AUTHORIZE)}
         >
-          Registration
+          Log in
         </Button>
       </form>
     </div>
