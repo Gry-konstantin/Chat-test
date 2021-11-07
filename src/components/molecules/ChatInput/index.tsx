@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import "./styles.scss";
 import { ChatButton } from "../../atoms/ChatButton";
-import { ChatInputAddFile } from "../../atoms/ChatInputAddFile";
 import { ReactComponent as AddFile } from "../../../assets/addFile.svg";
 import { ReactComponent as Send } from "../../../assets/send.svg";
 

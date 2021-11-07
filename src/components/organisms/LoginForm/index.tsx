@@ -30,10 +30,9 @@ export const LoginForm: React.FC = () => {
     },
     resolver: yupResolver(validationsLogin),
   });
-  const [imgSrc, setImgSrc] = useState<string>(" ");
   const [newDate, setNewDate] = useState<string>(Date());
   useEffect(() => {
-    setImgSrc(`http://109.194.37.212:93/api/auth/captcha?t=${newDate}`);
+    setNewDate(Date());
   }, [newDate]);
 
   const login = watch("login");
@@ -42,9 +41,9 @@ export const LoginForm: React.FC = () => {
   const history = useHistory();
   const onSubmit: SubmitHandler<UserSubmitForm> = async (data) => {
     const formData = new FormData();
-    formData.append("login", data.login);
-    formData.append("password", data.password);
-    formData.append("captcha", data.captcha);
+    (Object.keys(data) as Array<keyof typeof data>).map((item) => {
+      formData.append(item, data[item]);
+    });
     try {
       const response = await api.post("/api/auth/login", formData);
       localStorage.setItem("connect_key", response.data);
@@ -104,11 +103,10 @@ export const LoginForm: React.FC = () => {
             setValue("captcha", value);
           }}
           onClick={() => setNewDate(Date())}
-          imgsrc={imgSrc}
+          imgsrc={`http://109.194.37.212:93/api/auth/captcha?t=${newDate}`}
         >
           <ErrorIcon />
         </Input>
-        {/* <Selector /> */}
         <Button baseClass="authorization__button" type="submit">
           Log in
         </Button>

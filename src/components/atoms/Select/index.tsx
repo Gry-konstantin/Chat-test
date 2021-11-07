@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Select, { SingleValue } from "react-select";
 import api from "../../../api";
 import "./styles.scss";
@@ -14,36 +14,18 @@ interface ISelect {
   name: string;
   label: string;
   errorMesage?: string;
-}
-function upperCaseFirst(str = "") {
-  if (!str) return str;
-  return str[0].toUpperCase() + str.slice(1);
+  option: IGender[];
 }
 export const Selector: React.FC<ISelect> = ({
   onChange,
   name,
   label,
+  option,
   errorMesage,
 }) => {
-  const [gender, setGender] = useState<IGender[]>([]);
-  useEffect(() => {
-    api
-      .get("/api/auth")
-      .then((response) => {
-        const allGender = response.data.genders;
-        setGender(allGender);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-  const handleValueChange = (newValue: SingleValue<IGender>) => {
+  const handleGenderValueChange = (newValue: SingleValue<IGender>) => {
     onChange(newValue);
   };
-
-  const options: IGender[] = gender.map((item) => {
-    return { value: `${item.id}`, label: upperCaseFirst(item.gender) };
-  });
   return (
     <div
       className={`select__container ${errorMesage ? "container--error" : ""}`}
@@ -53,8 +35,8 @@ export const Selector: React.FC<ISelect> = ({
         classNamePrefix="select"
         placeholder="Your gender"
         name={name}
-        options={options}
-        onChange={handleValueChange}
+        options={option}
+        onChange={handleGenderValueChange}
       />
       {errorMesage && <p className="container__text--error">{errorMesage}</p>}
     </div>

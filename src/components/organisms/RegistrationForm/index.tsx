@@ -19,7 +19,12 @@ type UserSubmitForm = {
   name: string;
   gender_id: string;
 };
-
+interface IGender {
+  id?: number;
+  gender?: string;
+  value: string;
+  label?: string;
+}
 export const RefistrationForm: React.FC = () => {
   const {
     handleSubmit,
@@ -37,10 +42,27 @@ export const RefistrationForm: React.FC = () => {
     },
     resolver: yupResolver(validationsRegistration),
   });
-  const [imgSrc, setImgSrc] = useState<string>(" ");
   const [newDate, setNewDate] = useState<string>(Date());
+
+  const [option, setOption] = useState<IGender[]>([]);
   useEffect(() => {
-    setImgSrc(`http://109.194.37.212:93/api/auth/captcha?t=${newDate}`);
+    api
+      .get("/api/auth")
+      .then((response) => {
+        const options: IGender[] = response.data.genders.map(
+          (item: IGender) => {
+            return { value: `${item.id}`, label: item.gender };
+          }
+        );
+        setOption(options);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    setNewDate(Date());
   }, [newDate]);
 
   const login = watch("login");
@@ -51,12 +73,9 @@ export const RefistrationForm: React.FC = () => {
   const history = useHistory();
   const onSubmit: SubmitHandler<UserSubmitForm> = async (data) => {
     const formData = new FormData();
-    formData.append("login", data.login);
-    formData.append("password", data.password);
-    formData.append("password_confirm", data.password_confirm);
-    formData.append("name", data.name);
-    formData.append("gender_id", data.gender_id);
-    formData.append("captcha", data.captcha);
+    (Object.keys(data) as Array<keyof typeof data>).map((item) => {
+      formData.append(item, data[item]);
+    });
     try {
       await api.post("/api/auth/register", formData);
       history.push(SCREENS.SCREEN_AUTHORIZE);
@@ -134,6 +153,7 @@ export const RefistrationForm: React.FC = () => {
         <Selector
           label="Your gender"
           name="gender_id"
+          option={option}
           errorMesage={errors.gender_id?.message}
           onChange={(value) => {
             setValue("gender_id", value && value.value ? value.value : "");
@@ -151,7 +171,7 @@ export const RefistrationForm: React.FC = () => {
             setValue("captcha", value);
           }}
           onClick={() => setNewDate(Date())}
-          imgsrc={imgSrc}
+          imgsrc={`http://109.194.37.212:93/api/auth/captcha?t=${newDate}`}
         >
           <ErrorIcon />
         </Input>

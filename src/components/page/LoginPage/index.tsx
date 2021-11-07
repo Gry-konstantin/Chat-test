@@ -1,20 +1,16 @@
 import React from "react";
-import { MainLogin } from "../../organisms/MainLogin";
+import { LoginForm } from "../../organisms/LoginForm";
+import { FormTemplate } from "../../templates/FormTemplate";
 import "./styles.scss";
 
 export const LoginPage: React.FC = () => {
   return (
-    <div className="template">
-      <div className="wrapper">
-        <main>
-          <div className="main__item authorization">
-            <div className="item__content">
-              <MainLogin />
-            </div>
-            <div className="item__image" />
-          </div>
-        </main>
-      </div>
-    </div>
+    <FormTemplate
+      baseClass="authorization"
+      title={["Wellcome to ", "Chatty", "!"]}
+      subTitle="Please, autorize yourself"
+    >
+      <LoginForm />
+    </FormTemplate>
   );
 };
