@@ -1,5 +1,6 @@
 import React from "react";
 import "./styles.scss";
+import { ReactComponent as Refresh } from "../../../assets/refresh.svg";
 
 interface IInput {
   name?: string;
@@ -14,6 +15,8 @@ interface IInput {
   ref?: HTMLInputElement;
   type?: string;
   imgsrc?: string;
+  onClick?: () => void;
+  tabIndex?: number;
 }
 
 export const Input: React.FC<IInput> = ({
@@ -26,7 +29,9 @@ export const Input: React.FC<IInput> = ({
   placeholder,
   children,
   type,
+  tabIndex,
   imgsrc,
+  onClick,
 }) => {
   const handleValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
@@ -39,17 +44,25 @@ export const Input: React.FC<IInput> = ({
       }`}
     >
       {label && <label className="container__label">{label}</label>}
-      <div tabIndex={0} className="container__input">
+      <div className="container__input">
         <input
           name={name}
           value={value}
           placeholder={placeholder}
           onChange={handleValueChange}
           type={type}
+          tabIndex={tabIndex}
         />
         {errorMesage && <div className="container__image">{children}</div>}
       </div>
-      {imgsrc && <img src={imgsrc} />}
+      {imgsrc && (
+        <div className="captcha__image">
+          <img src={imgsrc} />
+          <div onClick={onClick} className="captcha__refresh">
+            <Refresh />
+          </div>
+        </div>
+      )}
       {errorMesage && <p className="container__text--error">{errorMesage}</p>}
     </div>
   );

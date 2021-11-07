@@ -15,7 +15,7 @@ export const Routes: React.FC = () => {
   return (
     <Router>
       <Switch>
-        <Route exact path={[SCREENS.SCREEN_LOGIN]}>
+        <Route exact path={[SCREENS.SCREEN_AUTHORIZE]}>
           <LoginPage />
         </Route>
         <Route exact path={[SCREENS.SCREEN_MAIN]}>

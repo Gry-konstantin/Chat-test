@@ -1,8 +1,9 @@
 import React from "react";
 import { Header } from "../../molecules/Header";
-import { Form } from "../../molecules/Form";
+import { LoginForm } from "../../molecules/LoginForm";
+import "./styles.scss";
 
-export const LoginForm: React.FC = () => {
+export const MainLogin: React.FC = () => {
   return (
     <div className="authorization">
       <Header
@@ -10,7 +11,7 @@ export const LoginForm: React.FC = () => {
         title={["Wellcome to ", "Chatty", "!"]}
         subTitle="Please, autorize yourself"
       />
-      <Form />
+      <LoginForm />
     </div>
   );
 };

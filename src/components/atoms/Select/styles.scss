@@ -1,0 +1,22 @@
+.select{
+    &__control {
+        width: 171px;
+        font-size: 15px;
+        border-color: #B3CDF8 !important;
+        height: 56px;
+        border-radius: 8px !important;
+        margin-top: 4px;
+    }
+    &__indicator{color:#5C98F1 !important}
+    &__indicator-separator{display: none;}
+    &__menu{
+        width: 171px !important;
+    }
+    &__container{
+        min-height: 104px;
+        &.container--error{
+            & .select__control{border-color: #fb6262 !important;}
+        }
+    }
+
+}

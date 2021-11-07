@@ -1,5 +1,5 @@
 import React from "react";
-import { LoginForm } from "../../organisms/LoginForm";
+import { MainLogin } from "../../organisms/MainLogin";
 import "./styles.scss";
 
 export const LoginPage: React.FC = () => {
@@ -9,7 +9,7 @@ export const LoginPage: React.FC = () => {
         <main>
           <div className="main__item authorization">
             <div className="item__content">
-              <LoginForm />
+              <MainLogin />
             </div>
             <div className="item__image" />
           </div>

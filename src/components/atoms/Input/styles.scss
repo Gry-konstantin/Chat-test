@@ -3,8 +3,9 @@
 .container {
   margin-bottom: 9px;
   min-height: 104px;
+  max-width: 457px;
   @media screen and (max-width: $mobile) {
-    margin-bottom: 24px;
+    min-height: 96px;
   }
   &__image {
     height: 20px;
@@ -15,13 +16,14 @@
     }
   }
   &__label {
-    display: inline-block;
+    display: block;
     font-weight: 600;
     font-size: 13px;
     line-height: 19px;
     color: #333333;
   }
   &__text--error {
+    width: 100%;
     color: #fb6262;
     font-weight: 500;
     font-size: 13px;
@@ -46,7 +48,7 @@
     & input {
       border-radius: 8px;
       pointer-events: auto;
-      width: 320px;
+      width: calc(100% - 34px);
       ::placeholder {
         color: #0e0808;
         font-size: 15px;
@@ -67,10 +69,54 @@
     }
   }
 }
-.captchaAuthorization{
-  &.container{
-    &__input {
-      display: none;
+.captcha.container {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  .container{
+    &__input{
+      width: calc(50% - 7px);
+      display: inline-flex;
+      box-sizing: border-box;
+      max-width: 171px;
+      height: 57px;
+      margin-right: 12px;
+    }
+    &__label{
+      width: 100%;
+    }
+  }
+  .captcha{
+    &__refresh{
+      display: flex;
+      align-items: center;
+      position: absolute;
+      top: 50%;
+      right: -12px;
+      transform: translate(100%, -50% );
+      @media screen and (max-width: $mobile) {
+        right: 14px;
+        transform: translate( 0%, -50%);
+      }
+    }
+    &__image{
+      width: calc(50% - 7px);
+      position: relative;
+      display: inline-block;
+      max-width: 171px;
+      border: 1px solid #b3cdf8;
+      height: 55px;
+      margin-top: 4px;
+      border-radius: 8px;
+      & img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        max-height: 90%;
+        max-width: 90%;
+      }
     }
   }
 }

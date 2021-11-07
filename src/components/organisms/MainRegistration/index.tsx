@@ -1,16 +1,16 @@
 import React from "react";
 import { Header } from "../../molecules/Header";
-import { Form } from "../../molecules/Form";
+import { RefistrationForm } from "../../molecules/RefistrationForm";
 
-export const RegistrationForm: React.FC = () => {
+export const MainRegistration: React.FC = () => {
   return (
     <div className="authorization">
       <Header
         baseClass="authorization"
-        title={["Wellcome to ", "Chatty", "!"]}
+        title={["Sign Up to ", "Chatty", "!"]}
         subTitle="Please, autorize yourself"
       />
-      <Form />
+      <RefistrationForm />
     </div>
   );
 };

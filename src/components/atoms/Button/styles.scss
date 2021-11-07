@@ -4,14 +4,17 @@
   margin-top: 16px;
   background: #5c98f1;
   border-radius: 8px;
-  width: 233px;
+  width: 171px;
+  margin-right: 12px;
   height: 56px;
   border: none;
   font-weight: 500;
   font-size: 15px;
   line-height: 23px;
   @media screen and (max-width: $mobile) {
-    margin-top: 56px;
+    margin-top: 24px;
+    margin-right: 0;
+    width: 100%;
   }
   color: #ffffff;
   &:hover {
@@ -22,5 +25,14 @@
   }
   &:disabled {
     background: #d1d1d1;
+  }
+  &[type="button"]{
+    background-color: #fff;
+    border: 1px solid #5C98F1;
+    box-sizing: border-box;
+    color: #5C98F1;
+    @media screen and (max-width: $mobile) {
+      margin-top: 9px;
+    }
   }
 }

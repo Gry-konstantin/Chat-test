@@ -19,18 +19,26 @@
   & .main__item {
     position: relative;
     display: flex;
+    min-height: 100vh;
   }
   .item {
     &__content {
       width: calc(100% - 724px);
-      padding: 256px 0 315px 121px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 20px 121px 20px 20px;
+      box-sizing: border-box;
+      min-width: auto;
       background-color: #fff;
       @media screen and (max-width: $desktop) {
         width: 50%;
       }
       @media screen and (max-width: $mobile) {
-        padding: 183px 13px 24px 14px;
+        justify-content: center;
+        padding: 123px 13px 24px 14px;
         width: 100%;
+        align-items: baseline;
         background-color: inherit;
         z-index: 2;
       }
@@ -49,7 +57,7 @@
       @media screen and (max-width: $mobile) {
         position: absolute;
         width: 100%;
-        height: 316px;
+        height: 256px;
         background-image: url("../../../assets/FrameMobile.png");
       }
     }

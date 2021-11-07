@@ -1,5 +1,5 @@
 import React from "react";
-import { RegistrationForm } from "../../organisms/RegistrationForm";
+import { MainRegistration } from "../../organisms/MainRegistration";
 import "./styles.scss";
 
 export const RegistrationPage: React.FC = () => {
@@ -9,7 +9,7 @@ export const RegistrationPage: React.FC = () => {
         <main>
           <div className="main__item authorization">
             <div className="item__content">
-              <RegistrationForm />
+              <MainRegistration />
             </div>
             <div className="item__image" />
           </div>
