@@ -10,6 +10,8 @@ import { useHistory } from "react-router-dom";
 import { validationsRegistration } from "../../../utils/validationsRegistration";
 import { Selector } from "../../atoms/Select";
 import api from "../../../api";
+import { UserSignin } from "../../../api/UserSignin";
+import { GetGenders } from "../../../api/GetGenders";
 
 type UserSubmitForm = {
   login: string;
@@ -46,8 +48,7 @@ export const RefistrationForm: React.FC = () => {
 
   const [option, setOption] = useState<IGender[]>([]);
   useEffect(() => {
-    api
-      .get("/api/auth")
+    GetGenders()
       .then((response) => {
         const options: IGender[] = response.data.genders.map(
           (item: IGender) => {
@@ -77,7 +78,7 @@ export const RefistrationForm: React.FC = () => {
       formData.append(item, data[item]);
     });
     try {
-      await api.post("/api/auth/register", formData);
+      UserSignin(formData);
       history.push(SCREENS.SCREEN_AUTHORIZE);
     } catch (error) {
       console.log(error);

@@ -8,13 +8,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { validationsLogin } from "../../../utils/validationsLogin";
-import api from "../../../api";
-
-type UserSubmitForm = {
-  login: string;
-  password: string;
-  captcha: string;
-};
+import { UserSubmitForm } from "../../../utils/types";
+import { UserLogin } from "../../../api/UserLogin";
 
 export const LoginForm: React.FC = () => {
   const {
@@ -39,17 +34,17 @@ export const LoginForm: React.FC = () => {
   const password = watch("password");
   const captcha = watch("captcha");
   const history = useHistory();
+
   const onSubmit: SubmitHandler<UserSubmitForm> = async (data) => {
     const formData = new FormData();
     (Object.keys(data) as Array<keyof typeof data>).map((item) => {
       formData.append(item, data[item]);
     });
     try {
-      const response = await api.post("/api/auth/login", formData);
-      localStorage.setItem("connect_key", response.data);
+      await UserLogin(formData);
       history.push(SCREENS.SCREEN_MAIN);
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      console.log(error.response.data);
     }
   };
 

@@ -30,7 +30,6 @@ export const ChatWrapper: React.FC<IChatWrapper> = ({ loader, selected }) => {
         <>
           <ChatInfo title={selected.name} status={selected.lastMessage} />
           <div className="message-wrapper">
-            {/* ERROOR */}
             {selected.message &&
               selected.message.map((infoMessage, index) => (
                 <Message key={index} {...infoMessage} />

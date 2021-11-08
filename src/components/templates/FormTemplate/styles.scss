@@ -1,0 +1,6 @@
+@import "../../../assets/styles/variables.scss";
+.item__content {
+  @media screen and (max-width: $mobile) {
+    width: 100%;
+  }
+}

@@ -13,3 +13,8 @@ export type Dialog = {
   status?: string;
   message?: IMessage[];
 };
+export type UserSubmitForm = {
+  login: string;
+  password: string;
+  captcha: string;
+};

@@ -1,5 +1,6 @@
 import React from "react";
 import { Header } from "../../molecules/Header";
+import "./styles.scss";
 interface ITemplate {
   baseClass?: string;
   title: string[];
@@ -15,9 +16,9 @@ export const FormTemplate: React.FC<ITemplate> = ({
     <div className="template">
       <div className="wrapper">
         <main>
-          <div className="main__item authorization">
-            <div className="item__content">
-              <div className="authorization">
+          <div className="main__item">
+            <div className="item__wrapper">
+              <div className={`item__content  ${baseClass}`}>
                 <Header
                   baseClass={baseClass}
                   title={title}

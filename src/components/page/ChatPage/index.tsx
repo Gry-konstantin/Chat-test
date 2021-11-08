@@ -12,7 +12,7 @@ export const ChatPage: React.FC = () => {
   return (
     <div className="wrapper">
       <HeaderChats baseClass="chat" />
-      <div className="main">
+      <div className={`main ${selectCompanion ? "isOpen" : ""}`}>
         <div className="main__aside">
           <div className="list">
             {Dialogs.length > 0 ? (
