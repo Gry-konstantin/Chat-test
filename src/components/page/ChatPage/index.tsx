@@ -1,12 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HeaderChats } from "../../molecules/HeaderChats";
 import { DialogItem } from "../../molecules/DialogItem";
 import { ChatWrapper } from "../../organisms/ChatWrapper";
 import "./styles.scss";
 import { Dialog } from "../../../utils/types";
+
 import { Dialogs } from "../../../constants/mok";
 
+import { useInitWebSocket } from "../../../utils/useInitWebsocket";
+
 export const ChatPage: React.FC = () => {
+  const { websocket, dialogs, isOpen } = useInitWebSocket();
+  useEffect(() => {
+    if (!websocket.current) return;
+    if (isOpen) {
+      websocket.current?.send('{"type":"users_list"}');
+      console.log(dialogs, websocket);
+    }
+  });
+  // const T = () => {
+  //   websocket.current?.send('{"type":"users_list"}')
+  //   console.log(dialogs)
+  // }
   const [isLoader, setIsLoader] = useState<boolean>(false);
   const [selectCompanion, setSelectCompanion] = useState<Dialog>();
   return (

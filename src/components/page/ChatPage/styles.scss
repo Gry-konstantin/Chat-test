@@ -1,12 +1,12 @@
 @import "../../../assets/styles/variables.scss";
 .main {
   display: flex;
-  &.isOpen{
+  &.isOpen {
     @media screen and (max-width: $mobile) {
       transform: translate(-430px, 0px);
     }
   }
-  &__aside{
+  &__aside {
     @media screen and (max-width: $mobile) {
       min-width: 100%;
       overflow: hidden;
