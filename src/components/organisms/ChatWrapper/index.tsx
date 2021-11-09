@@ -5,6 +5,8 @@ import { Message } from "../../atoms/Message";
 import { ChatInfo } from "../../atoms/ChatInfo";
 import { ChatInput } from "../../molecules/ChatInput";
 import { Dialog } from "../../../utils/types";
+import { $selectDialog } from "../../page/ChatPage/store";
+import { useStore } from "effector-react";
 
 interface IChatWrapper {
   loader: boolean;
@@ -17,6 +19,7 @@ export const ChatWrapper: React.FC<IChatWrapper> = ({
   selected,
   onClick,
 }) => {
+  const selectDialog = useStore($selectDialog);
   const anchorMessage = useRef<null | HTMLDivElement>(null);
   const [inputNameValue, setInputNameValue] = useState<string>("");
 
@@ -30,17 +33,17 @@ export const ChatWrapper: React.FC<IChatWrapper> = ({
   }
   return (
     <div className="chat-wrapper">
-      {selected ? (
+      {selectDialog ? (
         <>
           <ChatInfo
-            title={selected.name}
-            status={selected.lastMessage}
-            gender={selected.gender}
+            title={selectDialog.name}
+            status={selectDialog.lastMessage}
+            gender={selectDialog.gender}
             onClick={onClick}
           />
           <div className="message-wrapper">
-            {selected.message &&
-              selected.message.map((infoMessage, index) => (
+            {selectDialog.message &&
+              selectDialog.message.map((infoMessage, index) => (
                 <Message key={index} {...infoMessage} />
               ))}
             <div ref={anchorMessage} />

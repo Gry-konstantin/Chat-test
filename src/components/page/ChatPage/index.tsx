@@ -4,53 +4,35 @@ import { DialogItem } from "../../molecules/DialogItem";
 import { ChatWrapper } from "../../organisms/ChatWrapper";
 import "./styles.scss";
 import { Dialog } from "../../../utils/types";
-
-import { Dialogs } from "../../../constants/mok";
-
 import { useInitWebSocket } from "../../../utils/useInitWebsocket";
+import { useStore } from "effector-react";
+import { $dialogs, setSelectDialog, $selectDialog } from "./store";
 
 export const ChatPage: React.FC = () => {
-  const { websocket, dialogs, isOpen, getDialogs } = useInitWebSocket();
-  const [companions, setCompanions] = useState<Dialog[]>();
-
+  const { isOpen, getDialogs } = useInitWebSocket();
+  const dialogs = useStore($dialogs);
   useEffect(() => {
     if (isOpen) {
       getDialogs();
     }
   }, [isOpen]);
-
-  useEffect(() => {
-    const key = localStorage.getItem("connect_key");
-    const socket = new WebSocket(
-      `ws://109.194.37.212:2346/?type=test123154&ws_id=${key}`
-    );
-    socket.onopen = () => {
-      socket.send(JSON.stringify({ type: "users_list" }));
-    };
-    socket.onmessage = (message) => {
-      const response = JSON.parse(message.data);
-      if (response.type === "users_list") {
-        setCompanions(response.data);
-      }
-    };
-  }, []);
-
+  const selectDialog = useStore($selectDialog);
   const [isLoader, setIsLoader] = useState<boolean>(false);
-  const [selectCompanion, setSelectCompanion] = useState<Dialog | undefined>();
-  console.log(selectCompanion && Object.keys(selectCompanion).length);
   return (
     <div className="wrapper">
-      <HeaderChats baseClass={`chat ${selectCompanion ? "d-none" : ""}`} />
-      <div className={`main ${selectCompanion ? "isOpen" : ""}`}>
+      <HeaderChats baseClass={`chat ${selectDialog ? "d-none" : ""}`} />
+      <div className={`main ${selectDialog ? "isOpen" : ""}`}>
         <div className="main__aside">
           <div className="list">
-            {companions && companions.length > 0 ? (
-              companions.map((item, index) => (
+            {dialogs && dialogs.length > 0 ? (
+              dialogs.map((item, index) => (
                 <DialogItem
-                  baseClass={selectCompanion?.id === index ? "active" : ""}
+                  baseClass={selectDialog?.id === index ? "active" : ""}
                   key={index}
                   {...item}
-                  onClick={() => setSelectCompanion(item)}
+                  onClick={() => {
+                    setSelectDialog(item);
+                  }}
                 />
               ))
             ) : (
@@ -64,8 +46,7 @@ export const ChatPage: React.FC = () => {
         <div className="main__section">
           <ChatWrapper
             loader={isLoader}
-            selected={selectCompanion}
-            onClick={() => setSelectCompanion(undefined)}
+            onClick={() => setSelectDialog(undefined)}
           />
         </div>
       </div>

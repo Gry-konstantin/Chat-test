@@ -1,20 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-
-type Dialog = {
-  name: string;
-  gender: string;
-};
+import { setDialogs } from "../components/page/ChatPage/store";
 
 export function useInitWebSocket() {
   const websocket = useRef<WebSocket | null>(null);
-  const [dialogs, setDialogs] = useState<Dialog>();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   useEffect(() => {
     initWebSocket();
     return () => {
       closeWebSocket();
     };
-  });
+  }, []);
 
   const getDialogs = () => {
     websocket.current?.send('{"type":"users_list"}');
@@ -30,24 +25,37 @@ export function useInitWebSocket() {
         setIsOpen(true);
       };
       websocket.current.onmessage = (message) => {
+        // if (message.type === "message"){
+        //   const response = JSON.parse(message.data);
+        //   if (response.type === "users_list") {
+        //     setDialogs(response.data)
+        //   }
+        // }else{
+        //   console.log(message.data)
+        // }
         const response = JSON.parse(message.data);
         if (response.type === "users_list") {
           setDialogs(response.data);
-          console.log(dialogs);
+        } else if (response.type === "error") {
+          //???
+          console.log(response.data);
         }
+      };
+      websocket.current.onclose = () => {
+        setIsOpen(false);
+      };
+      //???
+      websocket.current.onerror = (error) => {
+        console.log(error);
       };
     }
   };
   const closeWebSocket = () => {
-    websocket.current?.onclose = () => {
-      setIsOpen(false);
-      console.log("close");
-    };
+    websocket.current?.close;
     return;
   };
   return {
     websocket,
-    dialogs,
     isOpen,
     getDialogs,
   };
