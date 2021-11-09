@@ -15,6 +15,10 @@ export function useInitWebSocket() {
       closeWebSocket();
     };
   });
+
+  const getDialogs = () => {
+    websocket.current?.send('{"type":"users_list"}');
+  };
   const initWebSocket = () => {
     const key = localStorage.getItem("connect_key");
     if (key) {
@@ -23,7 +27,6 @@ export function useInitWebSocket() {
       );
       websocket.current.onopen = () => {
         console.log("open");
-        // websocket.current?.send('{"type":"users_list"}')
         setIsOpen(true);
       };
       websocket.current.onmessage = (message) => {
@@ -36,16 +39,16 @@ export function useInitWebSocket() {
     }
   };
   const closeWebSocket = () => {
-    websocket.current &&
-      (websocket.current.onclose = () => {
-        setIsOpen(false);
-        console.log("close");
-      });
+    websocket.current?.onclose = () => {
+      setIsOpen(false);
+      console.log("close");
+    };
     return;
   };
   return {
     websocket,
     dialogs,
     isOpen,
+    getDialogs,
   };
 }

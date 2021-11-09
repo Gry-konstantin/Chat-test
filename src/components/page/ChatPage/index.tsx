@@ -10,14 +10,15 @@ import { Dialogs } from "../../../constants/mok";
 import { useInitWebSocket } from "../../../utils/useInitWebsocket";
 
 export const ChatPage: React.FC = () => {
-  const { websocket, dialogs, isOpen } = useInitWebSocket();
+  const { websocket, dialogs, isOpen, getDialogs } = useInitWebSocket();
   const [companions, setCompanions] = useState<Dialog[]>();
-  // useEffect(() => {
-  //   if (!websocket.current) return;
-  //   if(!isOpen) return
-  //   websocket.current?.send('{"type":"users_list"}')
-  //   console.log(dialogs,websocket)
-  // });
+
+  useEffect(() => {
+    if (isOpen) {
+      getDialogs();
+    }
+  }, [isOpen]);
+
   useEffect(() => {
     const key = localStorage.getItem("connect_key");
     const socket = new WebSocket(

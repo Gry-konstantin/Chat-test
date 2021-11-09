@@ -9,7 +9,7 @@
   @media screen and (max-width: $mobile) {
     height: 64px;
   }
-  &.d-none{
+  &.d-none {
     @media screen and (max-width: $mobile) {
       display: none;
     }

@@ -16,7 +16,7 @@
       line-height: 18px;
     }
   }
-  &__arrow{
+  &__arrow {
     display: none;
     @media screen and (max-width: $mobile) {
       display: block;
@@ -27,12 +27,12 @@
       left: 14px;
       transform: translate(0px, -50%);
     }
-    & svg{
+    & svg {
       width: 100%;
       height: 100%;
     }
   }
-  &__icon{
+  &__icon {
     display: none;
     @media screen and (max-width: $mobile) {
       display: block;
@@ -43,7 +43,7 @@
       left: 54px;
       transform: translate(0px, -50%);
     }
-    & svg{
+    & svg {
       width: 100%;
       height: 100%;
     }
