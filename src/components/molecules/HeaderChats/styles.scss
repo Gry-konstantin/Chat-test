@@ -1,5 +1,4 @@
 @import "../../../assets/styles/variables.scss";
-
 .headerChat {
   height: 80px;
   border-bottom: 1px solid #88abe3;
@@ -9,6 +8,11 @@
   justify-content: space-between;
   @media screen and (max-width: $mobile) {
     height: 64px;
+  }
+  &.d-none{
+    @media screen and (max-width: $mobile) {
+      display: none;
+    }
   }
   &__logo {
     width: 112px;

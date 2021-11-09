@@ -6,9 +6,10 @@ export interface IMessage {
   size?: string;
 }
 export type Dialog = {
-  id: number;
-  name: string;
-  lastMessage: string;
+  id?: number;
+  gender?: string;
+  name?: string;
+  lastMessage?: string;
   male?: boolean;
   status?: string;
   message?: IMessage[];

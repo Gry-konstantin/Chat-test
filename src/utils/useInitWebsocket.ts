@@ -21,18 +21,26 @@ export function useInitWebSocket() {
       websocket.current = new WebSocket(
         `ws://109.194.37.212:2346?type=test&ws_id=${key}`
       );
-      websocket.current.onopen = () => setIsOpen(true);
+      websocket.current.onopen = () => {
+        console.log("open");
+        // websocket.current?.send('{"type":"users_list"}')
+        setIsOpen(true);
+      };
       websocket.current.onmessage = (message) => {
         const response = JSON.parse(message.data);
         if (response.type === "users_list") {
           setDialogs(response.data);
+          console.log(dialogs);
         }
       };
     }
   };
   const closeWebSocket = () => {
-    websocket.current && (websocket.current.onclose = () => setIsOpen(false));
-    console.log("close");
+    websocket.current &&
+      (websocket.current.onclose = () => {
+        setIsOpen(false);
+        console.log("close");
+      });
     return;
   };
   return {

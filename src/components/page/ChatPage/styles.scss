@@ -3,7 +3,8 @@
   display: flex;
   &.isOpen {
     @media screen and (max-width: $mobile) {
-      transform: translate(-430px, 0px);
+      transform: translate(-100%, 0px);
+      // transition: all 1s;
     }
   }
   &__aside {

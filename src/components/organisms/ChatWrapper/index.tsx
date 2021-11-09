@@ -9,9 +9,14 @@ import { Dialog } from "../../../utils/types";
 interface IChatWrapper {
   loader: boolean;
   selected?: Dialog;
+  onClick?: () => void;
 }
 
-export const ChatWrapper: React.FC<IChatWrapper> = ({ loader, selected }) => {
+export const ChatWrapper: React.FC<IChatWrapper> = ({
+  loader,
+  selected,
+  onClick,
+}) => {
   const anchorMessage = useRef<null | HTMLDivElement>(null);
   const [inputNameValue, setInputNameValue] = useState<string>("");
 
@@ -23,12 +28,16 @@ export const ChatWrapper: React.FC<IChatWrapper> = ({ loader, selected }) => {
   if (loader) {
     return <Loading />;
   }
-
   return (
     <div className="chat-wrapper">
       {selected ? (
         <>
-          <ChatInfo title={selected.name} status={selected.lastMessage} />
+          <ChatInfo
+            title={selected.name}
+            status={selected.lastMessage}
+            gender={selected.gender}
+            onClick={onClick}
+          />
           <div className="message-wrapper">
             {selected.message &&
               selected.message.map((infoMessage, index) => (

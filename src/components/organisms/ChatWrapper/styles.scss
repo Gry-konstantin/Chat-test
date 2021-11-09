@@ -1,8 +1,13 @@
+@import "../../../assets/styles/variables.scss";
 .chat-wrapper {
   width: 100%;
   height: calc(100vh - 82px);
   min-height: 500px;
   position: relative;
+  @media screen and (max-width: $mobile) {
+    min-height: 100vh;
+    height: auto;
+  }
   background-image: url("../../../assets/bgchat.png");
   &__text {
     position: absolute;

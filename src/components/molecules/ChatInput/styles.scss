@@ -1,3 +1,4 @@
+@import "../../../assets/styles/variables.scss";
 .chatinput {
   position: absolute;
   bottom: 0px;
@@ -10,6 +11,9 @@
   border-top: 1px solid #d7e6ff;
   padding: 0 25px;
   box-sizing: border-box;
+  @media screen and (max-width: $mobile) {
+    height: 48px;
+  }
   & input {
     margin-left: 32px;
     width: calc(100% - 70px);
