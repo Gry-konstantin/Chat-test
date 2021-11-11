@@ -10,15 +10,10 @@ import { useStore } from "effector-react";
 
 interface IChatWrapper {
   loader: boolean;
-  selected?: Dialog;
   onClick?: () => void;
 }
 
-export const ChatWrapper: React.FC<IChatWrapper> = ({
-  loader,
-  selected,
-  onClick,
-}) => {
+export const ChatWrapper: React.FC<IChatWrapper> = ({ loader, onClick }) => {
   const selectDialog = useStore($selectDialog);
   const anchorMessage = useRef<null | HTMLDivElement>(null);
   const [inputNameValue, setInputNameValue] = useState<string>("");

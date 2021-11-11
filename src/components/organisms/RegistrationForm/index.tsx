@@ -9,9 +9,10 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { validationsRegistration } from "../../../utils/validationsRegistration";
 import { Selector } from "../../atoms/Select";
-import api from "../../../api";
+import { ToastContainer, toast } from "react-toastify";
 import { UserSignin } from "../../../api/UserSignin";
 import { GetGenders } from "../../../api/GetGenders";
+import axios from "axios";
 
 type UserSubmitForm = {
   login: string;
@@ -57,8 +58,8 @@ export const RefistrationForm: React.FC = () => {
         );
         setOption(options);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        toast.error(`Server error`);
       });
   }, []);
 
@@ -78,10 +79,15 @@ export const RefistrationForm: React.FC = () => {
       formData.append(item, data[item]);
     });
     try {
-      UserSignin(formData);
+      await UserSignin(formData);
       history.push(SCREENS.SCREEN_AUTHORIZE);
     } catch (error) {
-      console.log(error);
+      if (axios.isAxiosError(error)) {
+        const { response } = error;
+        response && response.data
+          ? toast.error(`${response && response.data}`)
+          : toast.error(`${response}`);
+      }
     }
   };
 
@@ -187,6 +193,7 @@ export const RefistrationForm: React.FC = () => {
           Log in
         </Button>
       </form>
+      <ToastContainer autoClose={3000} />
     </div>
   );
 };

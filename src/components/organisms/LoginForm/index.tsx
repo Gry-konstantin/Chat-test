@@ -10,6 +10,9 @@ import { useHistory } from "react-router-dom";
 import { validationsLogin } from "../../../utils/validationsLogin";
 import { UserSubmitForm } from "../../../utils/types";
 import { UserLogin } from "../../../api/UserLogin";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 export const LoginForm: React.FC = () => {
   const {
@@ -43,8 +46,13 @@ export const LoginForm: React.FC = () => {
     try {
       await UserLogin(formData);
       history.push(SCREENS.SCREEN_MAIN);
-    } catch (error: any) {
-      console.log(error.response.data);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const { response } = error;
+        response && response.data
+          ? toast.error(`${response && response.data}`)
+          : toast.error(`${response}`);
+      }
     }
   };
 
@@ -113,6 +121,7 @@ export const LoginForm: React.FC = () => {
           Registration
         </Button>
       </form>
+      <ToastContainer autoClose={3000} />
     </div>
   );
 };

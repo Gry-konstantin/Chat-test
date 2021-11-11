@@ -3,10 +3,10 @@ import { HeaderChats } from "../../molecules/HeaderChats";
 import { DialogItem } from "../../molecules/DialogItem";
 import { ChatWrapper } from "../../organisms/ChatWrapper";
 import "./styles.scss";
-import { Dialog } from "../../../utils/types";
 import { useInitWebSocket } from "../../../utils/useInitWebsocket";
 import { useStore } from "effector-react";
 import { $dialogs, setSelectDialog, $selectDialog } from "./store";
+import { ToastContainer } from "react-toastify";
 
 export const ChatPage: React.FC = () => {
   const { isOpen, getDialogs } = useInitWebSocket();
@@ -46,10 +46,11 @@ export const ChatPage: React.FC = () => {
         <div className="main__section">
           <ChatWrapper
             loader={isLoader}
-            onClick={() => setSelectDialog(undefined)}
+            onClick={() => setSelectDialog(null)}
           />
         </div>
       </div>
+      <ToastContainer autoClose={3000} />
     </div>
   );
 };
