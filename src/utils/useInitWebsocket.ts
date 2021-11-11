@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { setDialogs } from "../components/page/ChatPage/store";
 import { toast } from "react-toastify";
-
+import { Dialog } from "./types";
 export function useInitWebSocket() {
   const websocket = useRef<WebSocket | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -28,6 +28,9 @@ export function useInitWebSocket() {
       if (message.data.indexOf("wrong") <= 0) {
         const response = JSON.parse(message.data);
         if (response.type === "users_list") {
+          response.data.map((item: Dialog, index: number) => {
+            item.id = index;
+          });
           setDialogs(response.data);
         }
       } else {

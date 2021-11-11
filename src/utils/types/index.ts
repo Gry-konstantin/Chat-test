@@ -10,7 +10,6 @@ export type Dialog = {
   gender?: string;
   name?: string;
   lastMessage?: string;
-  male?: boolean;
   status?: string;
   message?: IMessage[];
 };
