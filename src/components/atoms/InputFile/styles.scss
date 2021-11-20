@@ -1,0 +1,10 @@
+.input {
+  &__container {
+    position: relative;
+  }
+  &__file {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+  }
+}
