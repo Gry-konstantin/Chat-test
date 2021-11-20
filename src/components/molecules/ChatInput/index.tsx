@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.scss";
 import { Button } from "../../atoms/Button";
 import { InputFile } from "../../atoms/InputFile";
@@ -8,35 +8,43 @@ import { UserSubmitForm } from "../../../utils/types";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { sendMessage } from "../../../api/sendMessage";
+import { useInitWebSocket } from "../../../utils/useInitWebsocket";
 interface IChatInput {
   baseClass?: string;
-  value: string;
-  onChange: (value: string) => void;
+  value?: string;
+  onChange?: (value: string) => void;
   placeholder?: string;
   type?: string;
 }
 export const ChatInput: React.FC<IChatInput> = ({
   baseClass = "",
-  value,
-  onChange,
   placeholder,
   type,
 }) => {
+  const { websocket } = useInitWebSocket();
+  const [contentMessage, setContentMessage] = useState<string>("");
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(e);
+    if (contentMessage) {
+      const message = JSON.stringify({
+        type: "message",
+        text: `${contentMessage}`,
+        target: 0,
+      });
+      setContentMessage("");
+      websocket.current?.send(`"${message}"`);
+    }
   };
 
   const handleValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(event.target.value);
+    setContentMessage(event.target.value);
   };
-  const handleInputFileChange = async (
-    value: EventTarget & HTMLInputElement
-  ) => {
+  const handleInputFileChange = (value: EventTarget & HTMLInputElement) => {
     const formData = new FormData();
     if (value.files) formData.append("0", value.files[0]);
     try {
-      const response = await sendMessage(formData);
+      const response = sendMessage(formData);
       console.log(response);
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -59,7 +67,7 @@ export const ChatInput: React.FC<IChatInput> = ({
           <AddFile />
         </InputFile>
         <input
-          value={value}
+          value={contentMessage}
           placeholder={placeholder}
           onChange={handleValueChange}
           type={type}

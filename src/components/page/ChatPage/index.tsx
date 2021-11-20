@@ -8,6 +8,16 @@ import { useStore } from "effector-react";
 import { $dialogs, setSelectDialog, $selectDialog } from "./store";
 import { ToastContainer } from "react-toastify";
 
+import { createEvent, createStore } from "effector";
+import { setMessage, $message } from "./store";
+
+interface IMessage {
+  text?: string;
+  itsMe?: boolean;
+  title?: string;
+  size?: string;
+}
+
 export const ChatPage: React.FC = () => {
   const { isOpen, getDialogs } = useInitWebSocket();
   const dialogs = useStore($dialogs);

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { setDialogs } from "../components/page/ChatPage/store";
 import { toast } from "react-toastify";
 import { Dialog } from "./types";
+import { setMessage } from "../components/page/ChatPage/store";
 export function useInitWebSocket() {
   const websocket = useRef<WebSocket | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -26,12 +27,20 @@ export function useInitWebSocket() {
     websocket.current.onmessage = (message) => {
       //TODO: Невозможно обработать ошибку, т.к. бек не как меня не оповещает об этом, приходиться делать такой костыль
       if (message.data.indexOf("wrong") <= 0) {
-        const response = JSON.parse(message.data);
-        if (response.type === "users_list") {
-          response.data.map((item: Dialog, index: number) => {
-            item.id = index;
-          });
-          setDialogs(response.data);
+        if (message.data.indexOf("message") > 0) {
+          const parseMessage = message.data.slice(1, message.data.length - 1);
+          setMessage(JSON.parse(parseMessage));
+        } else {
+          const response = JSON.parse(message.data);
+          console.log(response);
+          if (response.type === "users_list") {
+            response.data.map((item: Dialog, index: number) => {
+              item.id = index;
+            });
+            setDialogs(response.data);
+          } else if (response.type === "message") {
+            console.log(response.data);
+          }
         }
       } else {
         toast.error(`${message.data}`);
