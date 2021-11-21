@@ -3,8 +3,11 @@ import { Dialog } from "../../../../utils/types";
 
 type Message = {
   type: string;
-  text: string;
+  text?: string;
   target: number;
+  urlFile?: string;
+  name?: string;
+  size?: number;
 };
 
 const setDialogs = createEvent<Dialog[]>();

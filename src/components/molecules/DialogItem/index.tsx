@@ -7,7 +7,7 @@ interface IDialogItem {
   baseClass?: string;
   name?: string;
   lastMessage?: string;
-  male?: boolean;
+  gender?: string;
   onClick?: () => void;
 }
 
@@ -15,12 +15,14 @@ export const DialogItem: React.FC<IDialogItem> = ({
   onClick,
   name = "Konstantin Konstantinopolski",
   baseClass = "",
-  male = true,
+  gender = true,
   lastMessage = "hey",
 }) => {
   return (
     <div className={`companion ${baseClass}`} onClick={onClick}>
-      <div className="companion__icon">{male ? <Male /> : <Female />}</div>
+      <div className="companion__icon">
+        {gender === "male" ? <Male /> : <Female />}
+      </div>
       <div className="companion__text">
         <p className="text__name">{name}</p>
         <span className="text__lastMessage">{lastMessage}</span>

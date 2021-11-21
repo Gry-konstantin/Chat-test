@@ -23,6 +23,8 @@ export const ChatInput: React.FC<IChatInput> = ({
 }) => {
   const { websocket } = useInitWebSocket();
   const [contentMessage, setContentMessage] = useState<string>("");
+  const [urlFile, setUrlFile] = useState<string>("");
+  const [fileInfo, setFileInfo] = useState<any>();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,6 +36,16 @@ export const ChatInput: React.FC<IChatInput> = ({
       });
       setContentMessage("");
       websocket.current?.send(`"${message}"`);
+    } else if (urlFile) {
+      const message = JSON.stringify({
+        type: "message",
+        urlFile: `${urlFile}`,
+        name: fileInfo.name,
+        size: fileInfo.size,
+        target: 0,
+      });
+      setUrlFile("");
+      websocket.current?.send(`"${message}"`);
     }
   };
 
@@ -42,17 +54,22 @@ export const ChatInput: React.FC<IChatInput> = ({
   };
   const handleInputFileChange = (value: EventTarget & HTMLInputElement) => {
     const formData = new FormData();
-    if (value.files) formData.append("0", value.files[0]);
-    try {
-      const response = sendMessage(formData);
-      console.log(response);
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        const { response } = error;
-        response && response.data
-          ? toast.error(`${response && response.data}`)
-          : toast.error(`${response}`);
-      }
+    if (value.files) {
+      setFileInfo(value.files[0]);
+      formData.append("0", value.files[0]);
+      sendMessage(formData)
+        .then((response) => {
+          setUrlFile(response.data);
+        })
+        .catch((error) => {
+          if (axios.isAxiosError(error)) {
+            setUrlFile("");
+            const { response } = error;
+            response && response.data
+              ? toast.error(`${response && response.data}`)
+              : toast.error(`${response}`);
+          }
+        });
     }
   };
   return (

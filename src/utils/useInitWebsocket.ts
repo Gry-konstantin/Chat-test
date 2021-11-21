@@ -32,14 +32,11 @@ export function useInitWebSocket() {
           setMessage(JSON.parse(parseMessage));
         } else {
           const response = JSON.parse(message.data);
-          console.log(response);
           if (response.type === "users_list") {
             response.data.map((item: Dialog, index: number) => {
               item.id = index;
             });
             setDialogs(response.data);
-          } else if (response.type === "message") {
-            console.log(response.data);
           }
         }
       } else {
@@ -50,10 +47,6 @@ export function useInitWebSocket() {
     websocket.current.onclose = () => {
       setIsOpen(false);
     };
-    //???
-    // websocket.current.onerror = (error) => {
-    //   console.log(error);
-    // };
   };
   const closeWebSocket = () => {
     websocket.current?.close;

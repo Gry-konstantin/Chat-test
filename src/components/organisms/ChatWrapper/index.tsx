@@ -43,6 +43,9 @@ export const ChatWrapper: React.FC<IChatWrapper> = ({ loader, onClick }) => {
                 <Message
                   key={index}
                   text={infoMessage.text}
+                  urlFile={infoMessage.urlFile}
+                  name={infoMessage.name}
+                  size={infoMessage.size}
                   itsMe={Boolean(infoMessage.target)}
                 />
               ))}
