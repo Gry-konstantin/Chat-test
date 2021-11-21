@@ -4,7 +4,6 @@ import { Button } from "../../atoms/Button";
 import { InputFile } from "../../atoms/InputFile";
 import { ReactComponent as AddFile } from "../../../assets/addFile.svg";
 import { ReactComponent as Send } from "../../../assets/send.svg";
-import { UserSubmitForm } from "../../../utils/types";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { sendMessage } from "../../../api/sendMessage";
@@ -24,11 +23,24 @@ export const ChatInput: React.FC<IChatInput> = ({
   const { websocket } = useInitWebSocket();
   const [contentMessage, setContentMessage] = useState<string>("");
   const [urlFile, setUrlFile] = useState<string>("");
-  const [fileInfo, setFileInfo] = useState<any>();
+  const [fileInfo, setFileInfo] = useState<File>();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (contentMessage) {
+    if (contentMessage && urlFile) {
+      console.log(contentMessage, urlFile);
+      const message = JSON.stringify({
+        type: "message",
+        text: `${contentMessage}`,
+        urlFile: `${urlFile}`,
+        name: fileInfo?.name,
+        size: fileInfo?.size,
+        target: 0,
+      });
+      setContentMessage("");
+      setUrlFile("");
+      websocket.current?.send(`"${message}"`);
+    } else if (contentMessage) {
       const message = JSON.stringify({
         type: "message",
         text: `${contentMessage}`,
@@ -40,8 +52,8 @@ export const ChatInput: React.FC<IChatInput> = ({
       const message = JSON.stringify({
         type: "message",
         urlFile: `${urlFile}`,
-        name: fileInfo.name,
-        size: fileInfo.size,
+        name: fileInfo?.name,
+        size: fileInfo?.size,
         target: 0,
       });
       setUrlFile("");

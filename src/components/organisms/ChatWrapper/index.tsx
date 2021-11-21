@@ -4,7 +4,6 @@ import { Loading } from "../../atoms/Loading";
 import { Message } from "../../atoms/Message";
 import { ChatInfo } from "../../atoms/ChatInfo";
 import { ChatInput } from "../../molecules/ChatInput";
-import { Dialog } from "../../../utils/types";
 import { $selectDialog } from "../../page/ChatPage/store";
 import { useStore } from "effector-react";
 import { $message } from "../../page/ChatPage/store";

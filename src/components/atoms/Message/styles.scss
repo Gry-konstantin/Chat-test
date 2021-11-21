@@ -1,8 +1,6 @@
 .message {
   &__file {
-    // display: flex;
-    // align-items: center;
-    & a{
+    & a {
       display: flex;
       align-items: center;
       text-decoration: none;
@@ -93,7 +91,9 @@
     font-size: 16px;
     line-height: 20px;
     word-break: break-word;
-
     color: #303030;
+    &--margin-bottom{
+      margin-bottom: 10px;
+    }
   }
 }

@@ -2,6 +2,9 @@
   &__container {
     position: relative;
     cursor: pointer;
+    & svg {
+      cursor: pointer;
+    }
   }
   &__file {
     opacity: 0;
