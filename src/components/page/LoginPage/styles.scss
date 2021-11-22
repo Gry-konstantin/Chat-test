@@ -27,7 +27,7 @@
   }
   .item {
     &__wrapper {
-      width: calc(100% - 724px);
+      width: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -52,7 +52,7 @@
       background-image: url("../../../assets/Frame.png");
       background-repeat: no-repeat;
       background-size: cover;
-      width: 724px;
+      width: 50%;
       min-width: 724px;
       @media screen and (max-width: $desktop) {
         width: 50%;
