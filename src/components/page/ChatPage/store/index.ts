@@ -16,9 +16,10 @@ const $dialogs = createStore<Dialog[]>([]);
 forward({ from: setDialogs, to: $dialogs });
 
 const setMessage = createEvent<Message>();
-const $message = createStore<Message[]>([]).on(setMessage, (state, payload) => {
-  return [...state, payload];
-});
+const setAllMessage = createEvent<Message[]>();
+const $message = createStore<Message[]>([])
+  .on(setMessage, (state, payload) => [...state, payload])
+  .on(setAllMessage, (state, payload) => payload);
 
 const setSelectDialog = createEvent<Dialog | null>();
 const $selectDialog = createStore<Dialog | null>(null);
@@ -31,4 +32,5 @@ export {
   $selectDialog,
   setMessage,
   $message,
+  setAllMessage,
 };

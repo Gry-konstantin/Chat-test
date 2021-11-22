@@ -7,10 +7,14 @@ import { useInitWebSocket } from "../../../utils/useInitWebsocket";
 import { useStore } from "effector-react";
 import { $dialogs, setSelectDialog, $selectDialog } from "./store";
 import { ToastContainer } from "react-toastify";
-
+import { setAllMessage } from "./store";
 export const ChatPage: React.FC = () => {
   const { isOpen, getDialogs } = useInitWebSocket();
   const dialogs = useStore($dialogs);
+  useEffect(() => {
+    const messages = localStorage.getItem("message");
+    if (messages) setAllMessage(JSON.parse(messages));
+  }, []);
   useEffect(() => {
     if (isOpen) {
       getDialogs();

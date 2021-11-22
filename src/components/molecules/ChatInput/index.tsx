@@ -5,7 +5,7 @@ import { InputFile } from "../../atoms/InputFile";
 import { ReactComponent as AddFile } from "../../../assets/addFile.svg";
 import { ReactComponent as Send } from "../../../assets/send.svg";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { sendMessage } from "../../../api/sendMessage";
 import { useInitWebSocket } from "../../../utils/useInitWebsocket";
 interface IChatInput {
@@ -28,7 +28,6 @@ export const ChatInput: React.FC<IChatInput> = ({
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (contentMessage && urlFile) {
-      console.log(contentMessage, urlFile);
       const message = JSON.stringify({
         type: "message",
         text: `${contentMessage}`,
@@ -65,23 +64,44 @@ export const ChatInput: React.FC<IChatInput> = ({
     setContentMessage(event.target.value);
   };
   const handleInputFileChange = (value: EventTarget & HTMLInputElement) => {
-    const formData = new FormData();
-    if (value.files) {
-      setFileInfo(value.files[0]);
-      formData.append("0", value.files[0]);
-      sendMessage(formData)
-        .then((response) => {
-          setUrlFile(response.data);
-        })
-        .catch((error) => {
-          if (axios.isAxiosError(error)) {
-            setUrlFile("");
-            const { response } = error;
-            response && response.data
-              ? toast.error(`${response && response.data}`)
-              : toast.error(`${response}`);
-          }
-        });
+    try {
+      const currentFile = value.files![0];
+      if (currentFile.size > 2 * Math.pow(10, 6)) {
+        toast.error("no more than 2mb");
+      } else if (
+        currentFile.type === "video/mp4" ||
+        currentFile.type === "video/ogg" ||
+        currentFile.type === "video/webm" ||
+        currentFile.type === "audio/mpeg" ||
+        currentFile.type === "audio/ogg" ||
+        currentFile.type === "image/jpeg" ||
+        currentFile.type === "image/gif" ||
+        currentFile.type === "image/png" ||
+        currentFile.type === "image/svg+xml"
+      ) {
+        const formData = new FormData();
+        if (value.files) {
+          setFileInfo(value.files[0]);
+          formData.append("0", value.files[0]);
+          sendMessage(formData)
+            .then((response) => {
+              setUrlFile(response.data);
+            })
+            .catch((error) => {
+              if (axios.isAxiosError(error)) {
+                setUrlFile("");
+                const { response } = error;
+                toast.error(`${response && response.data}`);
+              }
+            });
+        }
+      } else {
+        toast.error(
+          "Desired file permission: mp4/ogg/webm/mpeg/jpg/gif/png/svg"
+        );
+      }
+    } catch (error) {
+      toast.error("unable to read the file");
     }
   };
   return (
@@ -105,7 +125,6 @@ export const ChatInput: React.FC<IChatInput> = ({
           <Send />
         </Button>
       </div>
-      <ToastContainer />
     </form>
   );
 };

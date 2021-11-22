@@ -3,6 +3,14 @@ import { setDialogs } from "../components/page/ChatPage/store";
 import { toast } from "react-toastify";
 import { Dialog } from "./types";
 import { setMessage } from "../components/page/ChatPage/store";
+type Message = {
+  type: string;
+  text?: string;
+  target: number;
+  urlFile?: string;
+  name?: string;
+  size?: number;
+};
 export function useInitWebSocket() {
   const websocket = useRef<WebSocket | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -12,6 +20,17 @@ export function useInitWebSocket() {
       closeWebSocket();
     };
   }, []);
+
+  const putMessageLocalStorage = (message: Message) => {
+    const oldMessage = localStorage.getItem("message");
+    if (oldMessage) {
+      const newMessage = JSON.parse(oldMessage);
+      newMessage.push(message);
+      localStorage.setItem("message", JSON.stringify(newMessage));
+    } else {
+      localStorage.setItem("message", JSON.stringify([message]));
+    }
+  };
 
   const getDialogs = () => {
     websocket.current?.send('{"type":"users_list"}');
@@ -30,6 +49,7 @@ export function useInitWebSocket() {
         if (message.data.indexOf("message") > 0) {
           const parseMessage = message.data.slice(1, message.data.length - 1);
           setMessage(JSON.parse(parseMessage));
+          putMessageLocalStorage(JSON.parse(parseMessage));
         } else {
           const response = JSON.parse(message.data);
           if (response.type === "users_list") {
