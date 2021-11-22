@@ -11,6 +11,9 @@ type Message = {
   name?: string;
   size?: number;
 };
+interface IFile extends File {
+  urlFile?: string;
+}
 export function useInitWebSocket() {
   const websocket = useRef<WebSocket | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -30,6 +33,35 @@ export function useInitWebSocket() {
     } else {
       localStorage.setItem("message", JSON.stringify([message]));
     }
+  };
+
+  const sendMessage = (text: string, file: IFile | undefined) => {
+    let message = "";
+    if (text && file) {
+      message = JSON.stringify({
+        type: "message",
+        text: `${text}`,
+        urlFile: file?.urlFile,
+        name: file?.name,
+        size: file?.size,
+        target: 1,
+      });
+    } else if (text) {
+      message = JSON.stringify({
+        type: "message",
+        text: `${text}`,
+        target: 1,
+      });
+    } else if (file) {
+      message = JSON.stringify({
+        type: "message",
+        urlFile: file?.urlFile,
+        name: file?.name,
+        size: file?.size,
+        target: 1,
+      });
+    }
+    websocket.current?.send(`"${message}"`);
   };
 
   const getDialogs = () => {
@@ -73,6 +105,7 @@ export function useInitWebSocket() {
     return;
   };
   return {
+    sendMessage,
     websocket,
     isOpen,
     getDialogs,

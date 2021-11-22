@@ -6,8 +6,9 @@ import { ReactComponent as AddFile } from "../../../assets/addFile.svg";
 import { ReactComponent as Send } from "../../../assets/send.svg";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { sendMessage } from "../../../api/sendMessage";
+import { sendFile } from "../../../api/sendFile";
 import { useInitWebSocket } from "../../../utils/useInitWebsocket";
+import { fileType } from "../../../constant";
 interface IChatInput {
   baseClass?: string;
   value?: string;
@@ -15,49 +16,23 @@ interface IChatInput {
   placeholder?: string;
   type?: string;
 }
+interface IFile extends File {
+  urlFile?: string;
+}
 export const ChatInput: React.FC<IChatInput> = ({
   baseClass = "",
   placeholder,
   type,
 }) => {
-  const { websocket } = useInitWebSocket();
+  const { sendMessage } = useInitWebSocket();
   const [contentMessage, setContentMessage] = useState<string>("");
-  const [urlFile, setUrlFile] = useState<string>("");
-  const [fileInfo, setFileInfo] = useState<File>();
+  const [fileInfo, setFileInfo] = useState<IFile>();
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (contentMessage && urlFile) {
-      const message = JSON.stringify({
-        type: "message",
-        text: `${contentMessage}`,
-        urlFile: `${urlFile}`,
-        name: fileInfo?.name,
-        size: fileInfo?.size,
-        target: 0,
-      });
-      setContentMessage("");
-      setUrlFile("");
-      websocket.current?.send(`"${message}"`);
-    } else if (contentMessage) {
-      const message = JSON.stringify({
-        type: "message",
-        text: `${contentMessage}`,
-        target: 0,
-      });
-      setContentMessage("");
-      websocket.current?.send(`"${message}"`);
-    } else if (urlFile) {
-      const message = JSON.stringify({
-        type: "message",
-        urlFile: `${urlFile}`,
-        name: fileInfo?.name,
-        size: fileInfo?.size,
-        target: 0,
-      });
-      setUrlFile("");
-      websocket.current?.send(`"${message}"`);
-    }
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    sendMessage(contentMessage, fileInfo);
+    setFileInfo(undefined);
+    setContentMessage("");
   };
 
   const handleValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,43 +40,34 @@ export const ChatInput: React.FC<IChatInput> = ({
   };
   const handleInputFileChange = (value: EventTarget & HTMLInputElement) => {
     try {
-      const currentFile = value.files![0];
-      if (currentFile.size > 2 * Math.pow(10, 6)) {
-        toast.error("no more than 2mb");
-      } else if (
-        currentFile.type === "video/mp4" ||
-        currentFile.type === "video/ogg" ||
-        currentFile.type === "video/webm" ||
-        currentFile.type === "audio/mpeg" ||
-        currentFile.type === "audio/ogg" ||
-        currentFile.type === "image/jpeg" ||
-        currentFile.type === "image/gif" ||
-        currentFile.type === "image/png" ||
-        currentFile.type === "image/svg+xml"
-      ) {
-        const formData = new FormData();
-        if (value.files) {
-          setFileInfo(value.files[0]);
+      if (value.files) {
+        const currentFile = value.files[0];
+        if (currentFile.size > 2 * Math.pow(10, 6)) {
+          toast.error("no more than 2mb");
+        } else if (fileType.includes(currentFile.type)) {
+          const formData = new FormData();
           formData.append("0", value.files[0]);
-          sendMessage(formData)
+          sendFile(formData)
             .then((response) => {
-              setUrlFile(response.data);
+              const infoFile: IFile = value.files![0];
+              infoFile.urlFile = response.data;
+              setFileInfo(infoFile);
             })
             .catch((error) => {
               if (axios.isAxiosError(error)) {
-                setUrlFile("");
+                setFileInfo(undefined);
                 const { response } = error;
                 toast.error(`${response && response.data}`);
               }
             });
+        } else {
+          toast.error(
+            "desired file permission: mp4/ogg/webm/mpeg/jpg/gif/png/svg"
+          );
         }
-      } else {
-        toast.error(
-          "Desired file permission: mp4/ogg/webm/mpeg/jpg/gif/png/svg"
-        );
       }
     } catch (error) {
-      toast.error("unable to read the file");
+      toast.error("cancel file upload");
     }
   };
   return (
