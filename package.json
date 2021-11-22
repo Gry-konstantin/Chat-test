@@ -1,4 +1,5 @@
 {
+  "homepage": "http://Gry-konstantin.github.io/Chat-test",
   "name": "academy-app",
   "version": "0.1.0",
   "private": true,
@@ -33,7 +34,9 @@
     "eject": "react-scripts eject",
     "prettier": "prettier --write .",
     "lint": "eslint src/* --ext .ts,.tsx --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
